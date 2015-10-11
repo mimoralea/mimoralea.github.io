@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>mimoralea.com</title><link href="http://www.mimoralea.com/" rel="alternate"></link><link href="http://www.mimoralea.com/feeds/quick-tips.atom.xml" rel="self"></link><id>http://www.mimoralea.com/</id><updated>2015-08-12T12:10:00-05:00</updated><entry><title>Dump R data for later reuse</title><link href="http://www.mimoralea.com/dump-r-data-for-later-reuse.html" rel="alternate"></link><updated>2015-08-12T12:10:00-05:00</updated><author><name>Miguel Morales</name></author><id>tag:www.mimoralea.com,2015-08-12:dump-r-data-for-later-reuse.html</id><summary type="html">&lt;p&gt;Nice! You are starting to do some &lt;code&gt;EDA&lt;/code&gt;, and found some cool features on the dataframe. However, time is up and you must continue at a later&amp;nbsp;time?&lt;/p&gt;
+&lt;p&gt;No problem, just save a dump of that object and load it back when you are ready to&amp;nbsp;continue!&lt;/p&gt;
+&lt;p&gt;Dump the&amp;nbsp;object:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kp"&gt;dump&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;df&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;2015-08-12-df.dump&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Ready to continue with your exploration?&amp;nbsp;Sure:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;source&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;2015-08-12-df.dump&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now, go get that break you needed and continue tomorrow&amp;nbsp;;)&lt;/p&gt;
+&lt;p&gt;Enjoy, and keep&amp;nbsp;hacking.&lt;/p&gt;</summary></entry><entry><title>Password-less ssh access one-liner</title><link href="http://www.mimoralea.com/password-less-ssh-access-one-liner.html" rel="alternate"></link><updated>2015-08-05T18:23:00-05:00</updated><author><name>Miguel Morales</name></author><id>tag:www.mimoralea.com,2015-08-05:password-less-ssh-access-one-liner.html</id><summary type="html">&lt;p&gt;So you are one of the guys that like to use a key pair to access your servers? Are you the one that ssh&amp;#8217;s into the server, creates an &lt;code&gt;authorized_keys&lt;/code&gt; file under the &lt;code&gt;.ssh&lt;/code&gt; folder and places his public key in&amp;nbsp;there?&lt;/p&gt;
+&lt;p&gt;Here is a nice short one-liner to do&amp;nbsp;that:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;ssh root@server &lt;span class="s2"&gt;&amp;quot;cat &amp;gt;&amp;gt; ~/.ssh/authorized_keys&amp;quot;&lt;/span&gt; &amp;lt; ~/.ssh/id_rsa.pub
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This one-liner will redirect the local public key into the &lt;code&gt;ssh&lt;/code&gt; command, which in turn will run the &lt;code&gt;cat&lt;/code&gt; to the contents of the redirect and append that into the remote &lt;code&gt;authorized_keys&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Bottom line, you end up with your local public key authorized in the remote server, thus a password-less access to&amp;nbsp;it.&lt;/p&gt;
+&lt;p&gt;Enjoy, and keep&amp;nbsp;hacking.&lt;/p&gt;</summary></entry></feed>

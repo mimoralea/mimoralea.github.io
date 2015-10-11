@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <link rel="stylesheet" type="text/css" href="./theme/css/style.css">
+    <link href="./theme/css/pygments.css" rel="stylesheet">
+    <!--link rel="stylesheet" type="text/css" href="./theme/css/prism.css"-->
+    <!--script src="./theme/js/prism.js"></script-->
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Miguel Morales">
+    <meta name="description" content="Posts and writings by Miguel Morales">
+
+    <link href="http://www.mimoralea.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="mimoralea.com Atom" />
+
+<meta name="keywords" content="">
+
+    <title>
+      mimoralea.com
+&ndash; Recursion, Memoization and Dynamic&nbsp;Programming    </title>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-65422309-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+  </head>
+
+  <body>
+    <aside>
+      <div id="user_meta">
+	<a href=".">
+	</a>
+	<h2><a href=".">mimoralea.com</a></h2>
+	<h4>Computer Scientist with a passion for AI</h4>
+	<p></p>
+        <a href="./pages/about.html">About</a>
+	<br/>
+        <a href="/pdfs/resume.pdf" target="_blank">Resume</a>
+	<br/>
+        <a href="https://www.github.com/mimoralea" target="_blank">Github</a>
+	<br/>
+        <a href="https://www.twitter.com/mimoralea" target="_blank">Twitter</a>
+	<br/>
+        <a href="https://www.linkedin.com/pub/miguel-morales/65/28/136/" target="_blank">LinkedIn</a>
+	<br/>
+        <a href="https://plus.google.com/+MiguelMorales-mimoralea" target="_blank">Google+</a>
+	<br/>
+        <a href="https://stackoverflow.com/users/786279/mimoralea" target="_blank">Stackoverflow</a>
+	<br/>
+	<br/>
+      </div>
+    </aside>
+
+    <main>
+      <header>
+	<p>
+	  <a href=".">Index</a> &brvbar;
+	  <a href="./archives.html">Archives</a> &brvbar;
+	  <a href="./categories.html">Categories</a>
+	</p>
+      </header>
+      <div id="main_body">
+<article>
+  <div class="article_title">
+    <h3><a href="./recursion-memoization-and-dynamic-programming.html">Recursion, Memoization and Dynamic&nbsp;Programming</a></h3>
+  </div>
+  <div class="article_text">
+    <p>I wanted to quickly show the differences between these 3 very related computer science concepts that tend to be&nbsp;mixed.</p>
+<p>For that, I will work on a well know problem, the Fibonacci&nbsp;series.</p>
+<p>The Fibonacci series looks something like: 0, 1, 1, 2, 3, 5, 8, 13, 21 &#8230; and so on. Any person with sufficient analytical skills would quickly notice the&nbsp;pattern.</p>
+<p><code>f(n) = f(n-1) + f(n-2)</code></p>
+<p>There are many ways someone can tackle this problem, the most intuitive one is&nbsp;recursion.</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">n</span>
+    <span class="k">return</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Timing this algorithm gives is about 257ms wall&nbsp;time.</p>
+<p><code>%time fib(30)</code></p>
+<blockquote>
+<p><span class="caps">CPU</span> times: user 266 ms, sys: 7.17 ms, total: 273&nbsp;ms</p>
+<p>Wall time: 257&nbsp;ms</p>
+<p>832040</p>
+</blockquote>
+<p>Now, the main problem of this algorithm is that we are computing some of the subproblems more than once. For instance, to compute <code>fib(4)</code> we would compute <code>fib(3)</code> and <code>fib(2)</code>.
+However, to compute <code>fib(3)</code> we also have to compute <code>fib(2)</code>. Say hello to&nbsp;memoization.</p>
+<p>In memoization we are doing nothing but caching the results of previously computed sub&nbsp;problems.</p>
+<div class="highlight"><pre><span class="n">m</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">def</span> <span class="nf">fibm</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">m</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">m</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+    <span class="n">m</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">n</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">fibm</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibm</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">m</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+</pre></div>
+
+
+<p>This algorithm is faster since we are avoiding extra computations, instead we are using a little more&nbsp;memory.</p>
+<p><code>%time fibm(30)</code></p>
+<blockquote>
+<p><span class="caps">CPU</span> times: user 38 µs, sys: 0 ns, total: 38&nbsp;µs</p>
+<p>Wall time: 27.2&nbsp;µs</p>
+<p>832040</p>
+</blockquote>
+<p>But the question is, can we do better than this? The use of the array is helpful, but when calculating very large numbers,
+or perhaps on memory contraint environments it might not be desirable. This is where Dynamic Programming fits the&nbsp;bill.</p>
+<p>In <span class="caps">DP</span> we take a bottom-up approach. Meaning, we solve the next Fibonacci number we can with the information we already&nbsp;have.</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">fibdp</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="mi">0</span>
+    <span class="n">prev</span><span class="p">,</span> <span class="n">curr</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">newf</span> <span class="o">=</span> <span class="n">prev</span> <span class="o">+</span> <span class="n">curr</span>
+        <span class="n">prev</span> <span class="o">=</span> <span class="n">curr</span>
+        <span class="n">curr</span> <span class="o">=</span> <span class="n">newf</span>
+    <span class="k">return</span> <span class="n">curr</span>
+</pre></div>
+
+
+<p>In this format, we don&#8217;t need to recurse or keep up with the memory intensive cache dictionary. These, add up to an even better&nbsp;performance.</p>
+<p><code>%time fibdp(30)</code></p>
+<blockquote>
+<p><span class="caps">CPU</span> times: user 10 µs, sys: 0 ns, total: 10&nbsp;µs</p>
+<p>Wall time: 10&nbsp;µs</p>
+<p>832040</p>
+</blockquote>
+<p>Pretty cool,&nbsp;isn&#8217;t?</p>
+<p>There is a lot of good information around the web to help you understand these methods better. I hope, however, that this post served you&nbsp;well.</p>
+<p>Keep&nbsp;hacking!</p>
+  </div>
+  <div class="article_meta">
+    <p>Posted on: Tue 08 September 2015</p>
+    <p>Category: <a href="./category/algorithms-and-methods.html">algorithms-and-methods</a>
+    </p>
+  </div>
+  <div id="article_comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_identifier = "recursion-memoization-and-dynamic-programming.html";
+      (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://mimoralea.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+  </div>
+
+</article>
+
+
+      </div>
+
+      <div id="ending_message">
+      <p>By Miguel Morales.</p>
+      </div>
+    </main>
+  </body>
+</html>
