@@ -19,7 +19,7 @@
 
     <title>
       mimoralea.com
-&ndash; Dump R data for later&nbsp;reuse    </title>
+&ndash; Installing Docker on Fedora&nbsp;23    </title>
 
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -69,33 +69,54 @@
       <div id="main_body">
 <article>
   <div class="article_title">
-    <h3><a href="./dump-r-data-for-later-reuse.html">Dump R data for later&nbsp;reuse</a></h3>
+    <h3><a href="./installing-docker-on-fedora-23.html">Installing Docker on Fedora&nbsp;23</a></h3>
   </div>
   <div class="article_text">
-    <p>Nice! You are starting to do some <code>EDA</code>, and found some cool features on the dataframe. However, time is up and you must continue at a later&nbsp;time?</p>
-<p>No problem, just save a dump of that object and load it back when you are ready to&nbsp;continue!</p>
-<p>Dump the&nbsp;object:</p>
-<div class="highlight"><pre><span></span><span class="kp">dump</span><span class="p">(</span><span class="s">&quot;df&quot;</span><span class="p">,</span> <span class="s">&quot;2015-08-12-df.dump&quot;</span><span class="p">)</span>
+    <p>So, for some reason every time I have to install Docker on Fedora I get a couple of bumps along the way. So, I wanted to leave a brief tip on how to get it installed without permission issues and without having to log out of the system. Here we&nbsp;go:</p>
+<p>First, rather obvious, you have to install the&nbsp;package:</p>
+<div class="highlight"><pre><span></span>sudo dnf -y install docker-io
 </pre></div>
 
 
-<p>Ready to continue with your exploration?&nbsp;Sure:</p>
-<div class="highlight"><pre><span></span><span class="kn">source</span><span class="p">(</span><span class="s">&quot;2015-08-12-df.dump&quot;</span><span class="p">)</span>
+<p>Next, lets add a docker group so you don&#8217;t have to run sudo every time you use the docker&nbsp;cli:</p>
+<div class="highlight"><pre><span></span>sudo groupadd docker
 </pre></div>
 
 
-<p>Now, go get that break you needed and continue tomorrow&nbsp;;)</p>
-<p>Enjoy, and keep&nbsp;hacking.</p>
+<p>Now, add your user to the docker&nbsp;group:</p>
+<div class="highlight"><pre><span></span>sudo usermod -aG docker <span class="nv">$USER</span>
+</pre></div>
+
+
+<p>Here is a little trick so you don&#8217;t have to login and out&#8230; I&#8217;m assuming you use your default group as primary group, that is the name of your primary group is the name of your user. If you are not sure run <code>groups $USER</code> to&nbsp;verify.</p>
+<div class="highlight"><pre><span></span>newgrp docker
+newgrp <span class="nv">$USER</span> <span class="c1"># or whatever your primary group is</span>
+</pre></div>
+
+
+<p>Now, finish up the installation by enabling (if you want docker to start automatically during boot) and starting the docker&nbsp;daemon:</p>
+<div class="highlight"><pre><span></span>sudo systemctl <span class="nb">enable</span> docker
+sudo systemctl start docker
+</pre></div>
+
+
+<p>Finally, verify your&nbsp;installation:</p>
+<div class="highlight"><pre><span></span>docker run hello-world
+</pre></div>
+
+
+<p>Now, the group thing was kinda hacky, so make sure you log out and back in,&nbsp;eventually.</p>
+<p>Meanwhile keep&nbsp;hacking!</p>
   </div>
   <div class="article_meta">
-    <p>Posted on: Wed 12 August 2015</p>
+    <p>Posted on: Tue 03 May 2016</p>
     <p>Category: <a href="./category/quick-tips.html">quick-tips</a>
     </p>
   </div>
   <div id="article_comments">
     <div id="disqus_thread"></div>
     <script type="text/javascript">
-      var disqus_identifier = "dump-r-data-for-later-reuse.html";
+      var disqus_identifier = "installing-docker-on-fedora-23.html";
       (function() {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
       dsq.src = 'http://mimoralea.disqus.com/embed.js';

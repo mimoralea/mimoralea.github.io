@@ -1,10 +1,462 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>mimoralea.com</title><link href="http://www.mimoralea.com/" rel="alternate"></link><link href="http://www.mimoralea.com/feeds/miguel-morales.atom.xml" rel="self"></link><id>http://www.mimoralea.com/</id><updated>2015-09-08T13:39:00-05:00</updated><entry><title>Recursion, Memoization and Dynamic Programming</title><link href="http://www.mimoralea.com/recursion-memoization-and-dynamic-programming.html" rel="alternate"></link><updated>2015-09-08T13:39:00-05:00</updated><author><name>Miguel Morales</name></author><id>tag:www.mimoralea.com,2015-09-08:recursion-memoization-and-dynamic-programming.html</id><summary type="html">&lt;p&gt;I wanted to quickly show the differences between these 3 very related computer science concepts that tend to be&amp;nbsp;mixed.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>mimoralea.com</title><link href="http://www.mimoralea.com/" rel="alternate"></link><link href="http://www.mimoralea.com/feeds/miguel-morales.atom.xml" rel="self"></link><id>http://www.mimoralea.com/</id><updated>2016-06-10T14:05:00-05:00</updated><entry><title>Installing Pianobar on Fedora 23</title><link href="http://www.mimoralea.com/installing-pianobar-on-fedora-23.html" rel="alternate"></link><published>2016-06-10T14:05:00-05:00</published><author><name>Miguel Morales</name></author><id>tag:www.mimoralea.com,2016-06-10:installing-pianobar-on-fedora-23.html</id><summary type="html">&lt;p&gt;Pandora and pianobar are almost as important &amp;#8216;tools&amp;#8217; on my development workflow as git and Emacs are. Not true, but sometimes I&amp;#8217;m in the mood and capable of coding and listening to good music. Here is a quick tip on how to install pianobar on a Fedora&amp;nbsp;system.&lt;/p&gt;
+&lt;p&gt;We start by cloning the&amp;nbsp;repository:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git clone git@github.com:PromyLOPh/pianobar.git
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Let&amp;#8217;s install all the make dependencies at once, thank me&amp;nbsp;later:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo dnf groupinstall -y &lt;span class="s2"&gt;&amp;quot;Development Tools&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Development Libraries&amp;quot;&lt;/span&gt;
+sudo dnf install -y http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-stable.noarch.rpm
+sudo dnf install -y libcurl libcurl-devel make automake gcc gcc-c++ kernel-devel ffmpeg ffmpeg-devel libgcrypt libgcrypt-devel libao libao-devel json-c json-c-devel
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Next, build pianobar and&amp;nbsp;install:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; pianobar
+gmake clean
+gmake
+sudo gmake install
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now, lets configure&amp;nbsp;it:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mkdir ~/.config/pianobar
+cp contrib/config-example ~/.config/pianobar/config
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Go edit that file and add your Pandora username, password and set the &lt;code&gt;autostart_station&lt;/code&gt; to your favorite personal station. That&amp;#8217;s&amp;nbsp;it!&lt;/p&gt;
+&lt;p&gt;Put your headsets on, type &lt;code&gt;pianobar&lt;/code&gt; and keep coding&amp;nbsp;away!&lt;/p&gt;</summary></entry><entry><title>Installing Docker on Fedora 23</title><link href="http://www.mimoralea.com/installing-docker-on-fedora-23.html" rel="alternate"></link><published>2016-05-03T17:05:00-05:00</published><author><name>Miguel Morales</name></author><id>tag:www.mimoralea.com,2016-05-03:installing-docker-on-fedora-23.html</id><summary type="html">&lt;p&gt;So, for some reason every time I have to install Docker on Fedora I get a couple of bumps along the way. So, I wanted to leave a brief tip on how to get it installed without permission issues and without having to log out of the system. Here we&amp;nbsp;go:&lt;/p&gt;
+&lt;p&gt;First, rather obvious, you have to install the&amp;nbsp;package:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo dnf -y install docker-io
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Next, lets add a docker group so you don&amp;#8217;t have to run sudo every time you use the docker&amp;nbsp;cli:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo groupadd docker
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now, add your user to the docker&amp;nbsp;group:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo usermod -aG docker &lt;span class="nv"&gt;$USER&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Here is a little trick so you don&amp;#8217;t have to login and out&amp;#8230; I&amp;#8217;m assuming you use your default group as primary group, that is the name of your primary group is the name of your user. If you are not sure run &lt;code&gt;groups $USER&lt;/code&gt; to&amp;nbsp;verify.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;newgrp docker
+newgrp &lt;span class="nv"&gt;$USER&lt;/span&gt; &lt;span class="c1"&gt;# or whatever your primary group is&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now, finish up the installation by enabling (if you want docker to start automatically during boot) and starting the docker&amp;nbsp;daemon:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo systemctl &lt;span class="nb"&gt;enable&lt;/span&gt; docker
+sudo systemctl start docker
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Finally, verify your&amp;nbsp;installation:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;docker run hello-world
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now, the group thing was kinda hacky, so make sure you log out and back in,&amp;nbsp;eventually.&lt;/p&gt;
+&lt;p&gt;Meanwhile keep&amp;nbsp;hacking!&lt;/p&gt;</summary></entry><entry><title>Reading Data in R</title><link href="http://www.mimoralea.com/reading-data-in-r.html" rel="alternate"></link><published>2015-10-16T07:40:00-05:00</published><author><name>Miguel Morales</name></author><id>tag:www.mimoralea.com,2015-10-16:reading-data-in-r.html</id><summary type="html">&lt;p&gt;One of the fundamental tasks a data scientist has to perform is loading
+the data to be&amp;nbsp;analyzed.&lt;/p&gt;
+&lt;p&gt;On this recipe, I will demonstrate how to read different formats of data
+in R. To make this fully reproducible, we will be using some files I
+collected and uploaded to my site. Check the references section for&amp;nbsp;credits.&lt;/p&gt;
+&lt;p&gt;We will show the following&amp;nbsp;formats:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;span class="caps"&gt;CSV&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class="caps"&gt;JSON&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class="caps"&gt;XML&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;Excel&lt;/li&gt;
+&lt;li&gt;Sqlite&lt;/li&gt;
+&lt;li&gt;&lt;span class="caps"&gt;HTML&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="section" id="obtaining-the-data"&gt;
+&lt;h2&gt;Obtaining the&amp;nbsp;data&lt;/h2&gt;
+&lt;pre class="code python literal-block"&gt;
+&lt;span class="c1"&gt;# create a temp directory and get on it&lt;/span&gt;
+&lt;span class="n"&gt;setwd&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tempdir&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;span class="n"&gt;getwd&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;
+&lt;span class="quo"&gt;&amp;#8216;&lt;/span&gt;/tmp/RtmpNZTbR1&amp;#8217;&lt;pre class="code python literal-block"&gt;
+&lt;span class="c1"&gt;# download file, unzip and clean&lt;/span&gt;
+&lt;span class="n"&gt;filename&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;reading-data-r.zip&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;file_url&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="n"&gt;paste&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;http://www.mimoralea.com/data&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sep&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;download&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file_url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;destfile&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;method&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;curl&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;unzip&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;unlink&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;local_files&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;local_files&lt;/span&gt;
+&lt;/pre&gt;
+&lt;ol class=list-inline&gt;
+    &lt;li&gt;&lt;span class="quo"&gt;&amp;#8216;&lt;/span&gt;cl-15-16.json&amp;#8217;&lt;/li&gt;
+    &lt;li&gt;&lt;span class="quo"&gt;&amp;#8216;&lt;/span&gt;grants-2010.xml&amp;#8217;&lt;/li&gt;
+    &lt;li&gt;&lt;span class="quo"&gt;&amp;#8216;&lt;/span&gt;primary_db.sqlite&amp;#8217;&lt;/li&gt;
+    &lt;li&gt;&lt;span class="quo"&gt;&amp;#8216;&lt;/span&gt;stem-2010.xls&amp;#8217;&lt;/li&gt;
+    &lt;li&gt;&lt;span class="quo"&gt;&amp;#8216;&lt;/span&gt;&lt;span class="caps"&gt;VLO&lt;/span&gt;.csv&amp;#8217;&lt;/li&gt;
+&lt;/ol&gt;&lt;div class="section" id="reading-csv-data"&gt;
+&lt;h3&gt;Reading &lt;span class="caps"&gt;CSV&lt;/span&gt;&amp;nbsp;data&lt;/h3&gt;
+&lt;pre class="code python literal-block"&gt;
+&lt;span class="n"&gt;csv&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="n"&gt;local_files&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;grepl&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;csv&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;local_files&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+&lt;span class="n"&gt;vlo&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;csv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;csv&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;vlo&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;summary&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;vlo&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;
+&lt;table&gt;
+&lt;thead&gt;&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th scope=col&gt;Date&lt;/th&gt;&lt;th scope=col&gt;Open&lt;/th&gt;&lt;th scope=col&gt;High&lt;/th&gt;&lt;th scope=col&gt;Low&lt;/th&gt;&lt;th scope=col&gt;Close&lt;/th&gt;&lt;th scope=col&gt;Volume&lt;/th&gt;&lt;th scope=col&gt;Adj.Close&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+&lt;tbody&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;1&lt;/th&gt;&lt;td&gt;2015-10-09&lt;/td&gt;&lt;td&gt;65.25&lt;/td&gt;&lt;td&gt;66.38&lt;/td&gt;&lt;td&gt;63.23&lt;/td&gt;&lt;td&gt;64.2&lt;/td&gt;&lt;td&gt;6619700&lt;/td&gt;&lt;td&gt;64.2&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;2&lt;/th&gt;&lt;td&gt;2015-10-08&lt;/td&gt;&lt;td&gt;64.25&lt;/td&gt;&lt;td&gt;66.14&lt;/td&gt;&lt;td&gt;64.23&lt;/td&gt;&lt;td&gt;65.71&lt;/td&gt;&lt;td&gt;4825500&lt;/td&gt;&lt;td&gt;65.71&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;3&lt;/th&gt;&lt;td&gt;2015-10-07&lt;/td&gt;&lt;td&gt;64.64&lt;/td&gt;&lt;td&gt;64.89&lt;/td&gt;&lt;td&gt;62.76&lt;/td&gt;&lt;td&gt;64.59&lt;/td&gt;&lt;td&gt;5989300&lt;/td&gt;&lt;td&gt;64.59&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;4&lt;/th&gt;&lt;td&gt;2015-10-06&lt;/td&gt;&lt;td&gt;64.52&lt;/td&gt;&lt;td&gt;64.86&lt;/td&gt;&lt;td&gt;63.1&lt;/td&gt;&lt;td&gt;63.94&lt;/td&gt;&lt;td&gt;6218800&lt;/td&gt;&lt;td&gt;63.94&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;5&lt;/th&gt;&lt;td&gt;2015-10-05&lt;/td&gt;&lt;td&gt;63.98&lt;/td&gt;&lt;td&gt;64.86&lt;/td&gt;&lt;td&gt;63.7&lt;/td&gt;&lt;td&gt;64.58&lt;/td&gt;&lt;td&gt;6483900&lt;/td&gt;&lt;td&gt;64.58&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;6&lt;/th&gt;&lt;td&gt;2015-10-02&lt;/td&gt;&lt;td&gt;61.52&lt;/td&gt;&lt;td&gt;63.12&lt;/td&gt;&lt;td&gt;60.53&lt;/td&gt;&lt;td&gt;63.1&lt;/td&gt;&lt;td&gt;4964400&lt;/td&gt;&lt;td&gt;63.1&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;pre class="literal-block"&gt;
+        Date           Open             High              Low
+1982-01-04:   1   Min.   :  4.50   Min.   :  4.625   Min.   :  4.50
+1982-01-05:   1   1st Qu.: 18.00   1st Qu.: 18.260   1st Qu.: 17.63
+1982-01-06:   1   Median : 24.34   Median : 24.625   Median : 24.00
+1982-01-07:   1   Mean   : 30.22   Mean   : 30.650   Mean   : 29.75
+1982-01-08:   1   3rd Qu.: 37.74   3rd Qu.: 38.138   3rd Qu.: 37.15
+1982-01-11:   1   Max.   :116.97   Max.   :117.250   Max.   :114.40
+(Other)   :8512
+    Close            Volume           Adj.Close
+Min.   :  4.50   Min.   :   35800   Min.   : 0.4628
+1st Qu.: 18.00   1st Qu.:  447725   1st Qu.: 2.1058
+Median : 24.29   Median : 1630850   Median : 4.2969
+Mean   : 30.20   Mean   : 4825914   Mean   :13.2348
+3rd Qu.: 37.65   3rd Qu.: 8267675   3rd Qu.:17.7693
+Max.   :116.12   Max.   :84719300   Max.   :70.4300
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="reading-json-data"&gt;
+&lt;h3&gt;Reading &lt;span class="caps"&gt;JSON&lt;/span&gt;&amp;nbsp;data&lt;/h3&gt;
+&lt;pre class="code python literal-block"&gt;
+&lt;span class="n"&gt;json&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="n"&gt;local_files&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;grepl&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;json&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;local_files&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+&lt;span class="n"&gt;library&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;jsonlite&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;cl&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="n"&gt;fromJSON&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;cl&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;grepl&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;FC&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cl&lt;/span&gt;&lt;span class="p"&gt;),]&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;shortName&lt;/span&gt;
+&lt;/pre&gt;
+&lt;pre class="literal-block"&gt;
+Attaching package: ‘jsonlite’
+
+The following object is masked from ‘package:utils’:
+
+    View
+&lt;/pre&gt;
+&lt;ol class=list-inline&gt;
+    &lt;li&gt;&lt;span class="dquo"&gt;&amp;#8220;&lt;/span&gt;Malmö&amp;#8221;&lt;/li&gt;
+    &lt;li&gt;&lt;span class="dquo"&gt;&amp;#8220;&lt;/span&gt;Astana&amp;#8221;&lt;/li&gt;
+    &lt;li&gt;&lt;span class="dquo"&gt;&amp;#8220;&lt;/span&gt;M&amp;#8217;gladbach&amp;#8221;&lt;/li&gt;
+    &lt;li&gt;&lt;span class="dquo"&gt;&amp;#8220;&lt;/span&gt;Juventus&amp;#8221;&lt;/li&gt;
+    &lt;li&gt;&lt;span class="dquo"&gt;&amp;#8220;&lt;/span&gt;Atlético&amp;#8221;&lt;/li&gt;
+    &lt;li&gt;&lt;span class="dquo"&gt;&amp;#8220;&lt;/span&gt;&lt;span class="caps"&gt;CSKA&lt;/span&gt;&amp;#8221;&lt;/li&gt;
+    &lt;li&gt;&lt;span class="dquo"&gt;&amp;#8220;&lt;/span&gt;ManU&amp;#8221;&lt;/li&gt;
+    &lt;li&gt;&lt;span class="dquo"&gt;&amp;#8220;&lt;/span&gt;Shakhtar&amp;#8221;&lt;/li&gt;
+    &lt;li&gt;&lt;span class="dquo"&gt;&amp;#8220;&lt;/span&gt;Zenit&amp;#8221;&lt;/li&gt;
+    &lt;li&gt;&lt;span class="dquo"&gt;&amp;#8220;&lt;/span&gt;Porto&amp;#8221;&lt;/li&gt;
+    &lt;li&gt;&lt;span class="dquo"&gt;&amp;#8220;&lt;/span&gt;&lt;span class="caps"&gt;NA&lt;/span&gt;&amp;#8221;&lt;/li&gt;
+    &lt;li&gt;&lt;span class="dquo"&gt;&amp;#8220;&lt;/span&gt;Bayern&amp;#8221;&lt;/li&gt;
+    &lt;li&gt;&lt;span class="dquo"&gt;&amp;#8220;&lt;/span&gt;Arsenal&amp;#8221;&lt;/li&gt;
+    &lt;li&gt;&lt;span class="dquo"&gt;&amp;#8220;&lt;/span&gt;Barcelona&amp;#8221;&lt;/li&gt;
+    &lt;li&gt;&lt;span class="dquo"&gt;&amp;#8220;&lt;/span&gt;&lt;span class="caps"&gt;BATE&lt;/span&gt;&amp;#8221;&lt;/li&gt;
+    &lt;li&gt;&lt;span class="dquo"&gt;&amp;#8220;&lt;/span&gt;Lyon&amp;#8221;&lt;/li&gt;
+&lt;/ol&gt;&lt;/div&gt;
+&lt;div class="section" id="reading-xml-data"&gt;
+&lt;h3&gt;Reading &lt;span class="caps"&gt;XML&lt;/span&gt;&amp;nbsp;data&lt;/h3&gt;
+&lt;pre class="code python literal-block"&gt;
+&lt;span class="n"&gt;xml&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="n"&gt;local_files&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;grepl&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;xml&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;local_files&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+&lt;span class="n"&gt;library&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;XML&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;grants&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="n"&gt;xmlTreeParse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;xml&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;useInternal&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;rootNode&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="n"&gt;xmlRoot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;grants&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;rootNode&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;
+&lt;/pre&gt;
+&lt;pre class="literal-block"&gt;
+&amp;lt;Grant AppNumber=&amp;quot;TD-50102-10&amp;quot;&amp;gt;
+  &amp;lt;ApplicantType&amp;gt;O&amp;lt;/ApplicantType&amp;gt;
+  &amp;lt;Institution&amp;gt;Center for Independent Documentary, Inc.&amp;lt;/Institution&amp;gt;
+  &amp;lt;InstCity&amp;gt;Sharon&amp;lt;/InstCity&amp;gt;
+  &amp;lt;InstState&amp;gt;MA&amp;lt;/InstState&amp;gt;
+  &amp;lt;InstPostalCode&amp;gt;02067-2868&amp;lt;/InstPostalCode&amp;gt;
+  &amp;lt;InstCountry&amp;gt;USA&amp;lt;/InstCountry&amp;gt;
+  &amp;lt;CouncilDate&amp;gt;2009-07-01&amp;lt;/CouncilDate&amp;gt;
+  &amp;lt;YearAwarded&amp;gt;2010&amp;lt;/YearAwarded&amp;gt;
+  &amp;lt;ProjectTitle&amp;gt;Mysticism and Monotheism&amp;lt;/ProjectTitle&amp;gt;
+  &amp;lt;Program&amp;gt;Media Projects Development&amp;lt;/Program&amp;gt;
+  &amp;lt;Division&amp;gt;Public Programs&amp;lt;/Division&amp;gt;
+  &amp;lt;ApprovedOutright&amp;gt;65000.0000&amp;lt;/ApprovedOutright&amp;gt;
+  &amp;lt;ApprovedMatching&amp;gt;0.0000&amp;lt;/ApprovedMatching&amp;gt;
+  &amp;lt;AwardOutright&amp;gt;65000.0000&amp;lt;/AwardOutright&amp;gt;
+  &amp;lt;AwardMatching&amp;gt;0.0000&amp;lt;/AwardMatching&amp;gt;
+  &amp;lt;OriginalAmount&amp;gt;65000.0000&amp;lt;/OriginalAmount&amp;gt;
+  &amp;lt;BeginGrant&amp;gt;2010-02-01T00:00:00&amp;lt;/BeginGrant&amp;gt;
+  &amp;lt;EndGrant&amp;gt;2010-08-31T00:00:00&amp;lt;/EndGrant&amp;gt;
+  &amp;lt;ProjectDesc/&amp;gt;
+  &amp;lt;ToSupport&amp;gt;Scripting for a two-hour television broadcast and companion website on mystical practice and its contemporary role in Judaism, Christianity, and Islam.&amp;lt;/ToSupport&amp;gt;
+  &amp;lt;SupplementCount&amp;gt;0&amp;lt;/SupplementCount&amp;gt;
+  &amp;lt;ParticipantCount&amp;gt;1&amp;lt;/ParticipantCount&amp;gt;
+  &amp;lt;Participant&amp;gt;
+    &amp;lt;Firstname&amp;gt;Christine&amp;lt;/Firstname&amp;gt;
+    &amp;lt;Lastname&amp;gt;Herbes-Sommers&amp;lt;/Lastname&amp;gt;
+    &amp;lt;Institution&amp;gt;Center for Independent Documentary, Inc.&amp;lt;/Institution&amp;gt;
+    &amp;lt;City&amp;gt;Sharon&amp;lt;/City&amp;gt;
+    &amp;lt;State&amp;gt;MA&amp;lt;/State&amp;gt;
+    &amp;lt;Country&amp;gt;USA&amp;lt;/Country&amp;gt;
+    &amp;lt;ParticipantTypeID&amp;gt;Project Director&amp;lt;/ParticipantTypeID&amp;gt;
+    &amp;lt;ValidFr&amp;gt;2009-02-03T07:20:39.360&amp;lt;/ValidFr&amp;gt;
+  &amp;lt;/Participant&amp;gt;
+  &amp;lt;DisciplineCount&amp;gt;1&amp;lt;/DisciplineCount&amp;gt;
+  &amp;lt;Discipline&amp;gt;
+    &amp;lt;Name&amp;gt;Comparative Religion&amp;lt;/Name&amp;gt;
+  &amp;lt;/Discipline&amp;gt;
+&amp;lt;/Grant&amp;gt;
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="reading-excel-files"&gt;
+&lt;h3&gt;Reading Excel&amp;nbsp;files&lt;/h3&gt;
+&lt;pre class="code python literal-block"&gt;
+&lt;span class="n"&gt;xls&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="n"&gt;local_files&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;grepl&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;xls&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;local_files&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+&lt;span class="n"&gt;library&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;xlsx&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;stem&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xlsx&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;xls&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sheetIndex&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;colIndex&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;rowIndex&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;header&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stem&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;
+&lt;pre class="literal-block"&gt;
+Loading required package: rJava
+Loading required package: xlsxjars
+&lt;/pre&gt;
+&lt;table&gt;
+&lt;thead&gt;&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th scope=col&gt;Index.Number&lt;/th&gt;&lt;th scope=col&gt;Investment.Name&lt;/th&gt;&lt;th scope=col&gt;Agency&lt;/th&gt;&lt;th scope=col&gt;Subagency&lt;/th&gt;&lt;th scope=col&gt;A..Brief.Description&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+&lt;tbody&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;1&lt;/th&gt;&lt;td&gt;PRG_0001&lt;/td&gt;&lt;td&gt;Centers for Ocean Sciences Education Excellence ~&lt;/td&gt;&lt;td&gt;National Science Foundation&lt;/td&gt;&lt;td&gt;Directorate for Geosciences (&lt;span class="caps"&gt;GEO&lt;/span&gt;)&lt;/td&gt;&lt;td&gt;The Division of Ocean Sciences seeks to establish a network of coordinated
+centers that will facilitate collaborations and communications between ocean
+science researchers and educators. These Centers for Ocean Science Education
+Excellence (&lt;span class="caps"&gt;COSEE&lt;/span&gt;) will foster the integration of ocean research into high
+quality educational materials, allow ocean researchers to gain a better
+understanding of educational organizations and pedagogy, provide educators with
+an enhanced capacity to understand and deliver high-quality educational
+programs in the ocean sciences, and provide material to the public that will
+promote a deeper understanding of the ocean and its influence on each person&amp;#8217;s
+quality of life and our national prosperity.&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;2&lt;/th&gt;&lt;td&gt;PRG_0002&lt;/td&gt;&lt;td&gt;Broadening Participation in Computing (&lt;span class="caps"&gt;BPC&lt;/span&gt;)&lt;/td&gt;&lt;td&gt;National Science Foundation&lt;/td&gt;&lt;td&gt;Directorate for Computer &lt;span class="amp"&gt;&amp;amp;&lt;/span&gt; Information Science &lt;span class="amp"&gt;&amp;amp;&lt;/span&gt; Engineering (&lt;span class="caps"&gt;CISE&lt;/span&gt;)&lt;/td&gt;&lt;td&gt;The &lt;span class="caps"&gt;BPC&lt;/span&gt; Program was not primarily aimed at education but at the larger issues of recruiting and retaining students from the underrepresented groups in computing:
+
+The Broadening Participation in Computing (&lt;span class="caps"&gt;BPC&lt;/span&gt;) program aims to significantly increase the number of &lt;span class="caps"&gt;U.S.&lt;/span&gt; citizens and permanent residents receiving post secondary degrees in the computing disciplines. Initially, its emphasis will be on students from communities with longstanding underrepresentation in computing: women, persons with disabilities, and minorities. Included minorities are African Americans, Hispanics, American Indians, Alaska Natives, Native Hawaiians, and Pacific Islanders. The &lt;span class="caps"&gt;BPC&lt;/span&gt; program seeks to engage the computing community in developing and implementing innovative methods to improve recruitment and retention of these students at the undergraduate and graduate levels. Because the lack of role models in the professoriate can be a barrier to participation, the &lt;span class="caps"&gt;BPC&lt;/span&gt; program also aims to develop effective strategies for identifying and supporting members of the targeted groups who want to pursue academic careers in computing. While these efforts focus on underrepresented groups, it is expected that the resulting types of interventions will improve research and education opportunities for all students in computing.&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;3&lt;/th&gt;&lt;td&gt;PRG_0003&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;CISE&lt;/span&gt; Pathways to Revitalized Undergraduate Computing Education (&lt;span class="caps"&gt;CPATH&lt;/span&gt;)&lt;/td&gt;&lt;td&gt;National Science Foundation&lt;/td&gt;&lt;td&gt;Directorate for Computer &lt;span class="amp"&gt;&amp;amp;&lt;/span&gt; Information Science &lt;span class="amp"&gt;&amp;amp;&lt;/span&gt; Engineering (&lt;span class="caps"&gt;CISE&lt;/span&gt;)&lt;/td&gt;&lt;td&gt;Through the &lt;span class="caps"&gt;CISE&lt;/span&gt; Pathways to Revitalized Undergraduate Computing Education (&lt;span class="caps"&gt;CPATH&lt;/span&gt;) program, &lt;span class="caps"&gt;NSF&lt;/span&gt;&amp;#8217;s Directorate for Computer and Information Science and Engineering (&lt;span class="caps"&gt;CISE&lt;/span&gt;) is challenging its partners – colleges, universities and other stakeholders committed to advancing the field of computing and its impact - to transform undergraduate computing education on a national scale, to meet the challenges and opportunities of a world where computing is essential to &lt;span class="caps"&gt;U.S.&lt;/span&gt; leadership and economic competitiveness across all sectors of society.
+The &lt;span class="caps"&gt;CISE&lt;/span&gt; Pathways to Revitalized Undergraduate Education in Computing (&lt;span class="caps"&gt;CPATH&lt;/span&gt;) program  also recognizes the growing importance of &lt;span class="caps"&gt;CT&lt;/span&gt; in society.  The goals of the program are to:
+•   contribute to the development of a globally competitive &lt;span class="caps"&gt;U.S.&lt;/span&gt; workforce with &lt;span class="caps"&gt;CT&lt;/span&gt; competencies essential to &lt;span class="caps"&gt;U.S.&lt;/span&gt; leadership in the global innovation enterprise;
+•   increase awareness of the strategic importance of undergraduate computing education in a wide range of career fields and disciplinary and interdisciplinary areas;
+•   identify and implement integrative new models for undergraduate computing education that are replicable across a variety of programs and institutions, and have a high probability of adoption on a national scale;
+•   increase the number of students developing &lt;span class="caps"&gt;CT&lt;/span&gt; competencies by infusing &lt;span class="caps"&gt;CT&lt;/span&gt; learning opportunities into undergraduate education in the core computing fields - computer and information science and engineering, and in other fields of study; and,
+•   demonstrate transformative &lt;span class="caps"&gt;CT&lt;/span&gt;-focused undergraduate education models that are replicable across a variety of institutions.
+&lt;span class="caps"&gt;CPATH&lt;/span&gt; seeks to identify and define the core computing concepts, methods, technologies and tools to be integrated into promising new undergraduate education models, and to demonstrate effective strategies to develop and assess &lt;span class="caps"&gt;CT&lt;/span&gt; competencies in the relevant learning communities.  While aimed primarily at revitalizing undergraduate education, &lt;span class="caps"&gt;CISE&lt;/span&gt; encourages the exploration of new models that extend from institutions of higher education into the K-12 environment; activities that engage K-12 teachers and students to facilitate the seamless transition of secondary students into &lt;span class="caps"&gt;CT&lt;/span&gt;-focused undergraduate programs are particularly encouraged.&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;
+&lt;div class="section" id="reading-from-sqlite-database"&gt;
+&lt;h3&gt;Reading from sqlite&amp;nbsp;database&lt;/h3&gt;
+&lt;pre class="code python literal-block"&gt;
+&lt;span class="n"&gt;library&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;RSQLite&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;sqlite&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="n"&gt;local_files&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;grepl&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;sqlite&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;local_files&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+&lt;span class="n"&gt;conn&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="n"&gt;dbConnect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;drv&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;RSQLite&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="n"&gt;SQLite&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;sqlite&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;tables&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="n"&gt;dbListTables&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;tables&lt;/span&gt;
+&lt;span class="n"&gt;dbGetQuery&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;SELECT name, summary FROM packages WHERE name like '%py%' LIMIT 5&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;lapply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;setdiff&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tables&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'packages'&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;table&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;dbGetQuery&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;conn&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;paste&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;SELECT * FROM&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;table&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;LIMIT 5&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;/pre&gt;
+&lt;pre class="literal-block"&gt;
+Loading required package: DBI
+&lt;/pre&gt;
+&lt;ol class=list-inline&gt;
+    &lt;li&gt;&lt;span class="quo"&gt;&amp;#8216;&lt;/span&gt;conflicts&amp;#8217;&lt;/li&gt;
+    &lt;li&gt;&lt;span class="quo"&gt;&amp;#8216;&lt;/span&gt;db_info&amp;#8217;&lt;/li&gt;
+    &lt;li&gt;&lt;span class="quo"&gt;&amp;#8216;&lt;/span&gt;files&amp;#8217;&lt;/li&gt;
+    &lt;li&gt;&lt;span class="quo"&gt;&amp;#8216;&lt;/span&gt;obsoletes&amp;#8217;&lt;/li&gt;
+    &lt;li&gt;&lt;span class="quo"&gt;&amp;#8216;&lt;/span&gt;packages&amp;#8217;&lt;/li&gt;
+    &lt;li&gt;&lt;span class="quo"&gt;&amp;#8216;&lt;/span&gt;provides&amp;#8217;&lt;/li&gt;
+    &lt;li&gt;&lt;span class="quo"&gt;&amp;#8216;&lt;/span&gt;requires&amp;#8217;&lt;/li&gt;
+&lt;/ol&gt;&lt;table&gt;
+&lt;thead&gt;&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th scope=col&gt;name&lt;/th&gt;&lt;th scope=col&gt;summary&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+&lt;tbody&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;1&lt;/th&gt;&lt;td&gt;mlt-python&lt;/td&gt;&lt;td&gt;Python package to work with &lt;span class="caps"&gt;MLT&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;2&lt;/th&gt;&lt;td&gt;k9copy&lt;/td&gt;&lt;td&gt;Video &lt;span class="caps"&gt;DVD&lt;/span&gt; backup and creation program&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;3&lt;/th&gt;&lt;td&gt;python-MythTV&lt;/td&gt;&lt;td&gt;Python bindings for MythTV&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;4&lt;/th&gt;&lt;td&gt;python-swftools&lt;/td&gt;&lt;td&gt;Python bindings for swftools&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;5&lt;/th&gt;&lt;td&gt;vobcopy&lt;/td&gt;&lt;td&gt;Utility to copy &lt;span class="caps"&gt;DVD&lt;/span&gt; .vob files to disk&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;ol&gt;
+    &lt;li&gt;&lt;table&gt;
+&lt;thead&gt;&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th scope=col&gt;name&lt;/th&gt;&lt;th scope=col&gt;flags&lt;/th&gt;&lt;th scope=col&gt;epoch&lt;/th&gt;&lt;th scope=col&gt;version&lt;/th&gt;&lt;th scope=col&gt;release&lt;/th&gt;&lt;th scope=col&gt;pkgKey&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+&lt;tbody&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;1&lt;/th&gt;&lt;td&gt;audacity&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;NA&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;NA&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;NA&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;NA&lt;/span&gt;&lt;/td&gt;&lt;td&gt;83&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;2&lt;/th&gt;&lt;td&gt;VirtualBox-guest&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;LE&lt;/span&gt;&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;4.3.28&lt;/td&gt;&lt;td&gt;1.fc22&lt;/td&gt;&lt;td&gt;104&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;3&lt;/th&gt;&lt;td&gt;totem&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;NA&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;NA&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;NA&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;NA&lt;/span&gt;&lt;/td&gt;&lt;td&gt;163&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;4&lt;/th&gt;&lt;td&gt;kernel-debug-devel&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;NA&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;NA&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;NA&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;NA&lt;/span&gt;&lt;/td&gt;&lt;td&gt;271&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;5&lt;/th&gt;&lt;td&gt;VirtualBox&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;LE&lt;/span&gt;&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;4.3.28&lt;/td&gt;&lt;td&gt;1.fc22&lt;/td&gt;&lt;td&gt;415&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+    &lt;li&gt;&lt;table&gt;
+&lt;thead&gt;&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th scope=col&gt;dbversion&lt;/th&gt;&lt;th scope=col&gt;checksum&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+&lt;tbody&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;1&lt;/th&gt;&lt;td&gt;10&lt;/td&gt;&lt;td&gt;ddf0827190089af87e19c1a3e33c2ba35b85fb75a84d4ec8fc9ce29cd84b1aab&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+    &lt;li&gt;&lt;table&gt;
+&lt;thead&gt;&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th scope=col&gt;name&lt;/th&gt;&lt;th scope=col&gt;type&lt;/th&gt;&lt;th scope=col&gt;pkgKey&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+&lt;tbody&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;1&lt;/th&gt;&lt;td&gt;/etc/rpm/macros.live555&lt;/td&gt;&lt;td&gt;file&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;2&lt;/th&gt;&lt;td&gt;/usr/bin/vlc-wrapper&lt;/td&gt;&lt;td&gt;file&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;3&lt;/th&gt;&lt;td&gt;/usr/bin/vlc&lt;/td&gt;&lt;td&gt;file&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;4&lt;/th&gt;&lt;td&gt;/usr/bin/rvlc&lt;/td&gt;&lt;td&gt;file&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;5&lt;/th&gt;&lt;td&gt;/usr/bin/nvlc&lt;/td&gt;&lt;td&gt;file&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+    &lt;li&gt;&lt;table&gt;
+&lt;thead&gt;&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th scope=col&gt;name&lt;/th&gt;&lt;th scope=col&gt;flags&lt;/th&gt;&lt;th scope=col&gt;epoch&lt;/th&gt;&lt;th scope=col&gt;version&lt;/th&gt;&lt;th scope=col&gt;release&lt;/th&gt;&lt;th scope=col&gt;pkgKey&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+&lt;tbody&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;1&lt;/th&gt;&lt;td&gt;live-devel&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;LT&lt;/span&gt;&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;0.19.2008.04.03&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;2&lt;/th&gt;&lt;td&gt;vlc-nox&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;LT&lt;/span&gt;&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;1.1.5&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;3&lt;/th&gt;&lt;td&gt;y4mscaler&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;LT&lt;/span&gt;&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;9.0&lt;/td&gt;&lt;td&gt;14&lt;/td&gt;&lt;td&gt;10&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;4&lt;/th&gt;&lt;td&gt;xbmc-devel&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;LT&lt;/span&gt;&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;14.0&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;NA&lt;/span&gt;&lt;/td&gt;&lt;td&gt;17&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;5&lt;/th&gt;&lt;td&gt;xbmc-eventclients-devel&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;LT&lt;/span&gt;&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;14.0&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;NA&lt;/span&gt;&lt;/td&gt;&lt;td&gt;41&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+    &lt;li&gt;&lt;table&gt;
+&lt;thead&gt;&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th scope=col&gt;name&lt;/th&gt;&lt;th scope=col&gt;flags&lt;/th&gt;&lt;th scope=col&gt;epoch&lt;/th&gt;&lt;th scope=col&gt;version&lt;/th&gt;&lt;th scope=col&gt;release&lt;/th&gt;&lt;th scope=col&gt;pkgKey&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+&lt;tbody&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;1&lt;/th&gt;&lt;td&gt;live555-devel(x86-64)&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;EQ&lt;/span&gt;&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;2014.10.21&lt;/td&gt;&lt;td&gt;1.fc22&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;2&lt;/th&gt;&lt;td&gt;live555-devel&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;EQ&lt;/span&gt;&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;2014.10.21&lt;/td&gt;&lt;td&gt;1.fc22&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;3&lt;/th&gt;&lt;td&gt;live-devel&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;EQ&lt;/span&gt;&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;2014.10.21&lt;/td&gt;&lt;td&gt;1.fc22&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;4&lt;/th&gt;&lt;td&gt;config(live555-devel)&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;EQ&lt;/span&gt;&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;2014.10.21&lt;/td&gt;&lt;td&gt;1.fc22&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;5&lt;/th&gt;&lt;td&gt;vlc-nox&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;EQ&lt;/span&gt;&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;2.2.1&lt;/td&gt;&lt;td&gt;6.fc22&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+    &lt;li&gt;&lt;table&gt;
+&lt;thead&gt;&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th scope=col&gt;name&lt;/th&gt;&lt;th scope=col&gt;flags&lt;/th&gt;&lt;th scope=col&gt;epoch&lt;/th&gt;&lt;th scope=col&gt;version&lt;/th&gt;&lt;th scope=col&gt;release&lt;/th&gt;&lt;th scope=col&gt;pkgKey&lt;/th&gt;&lt;th scope=col&gt;pre&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+&lt;tbody&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;1&lt;/th&gt;&lt;td&gt;live555(x86-64)&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;EQ&lt;/span&gt;&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;2014.10.21&lt;/td&gt;&lt;td&gt;1.fc22&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;FALSE&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;2&lt;/th&gt;&lt;td&gt;rtld(GNU_HASH)&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;NA&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;NA&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;NA&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;NA&lt;/span&gt;&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;FALSE&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;3&lt;/th&gt;&lt;td&gt;live555(x86-32)&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;EQ&lt;/span&gt;&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;2014.10.21&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;NA&lt;/span&gt;&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;FALSE&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;4&lt;/th&gt;&lt;td&gt;libzvbi.so.0&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;NA&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;NA&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;NA&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;NA&lt;/span&gt;&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;FALSE&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope=row&gt;5&lt;/th&gt;&lt;td&gt;libz.so.1(ZLIB_1.2.0.2)&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;NA&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;NA&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;NA&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;NA&lt;/span&gt;&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;td&gt;&lt;span class="caps"&gt;FALSE&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;/ol&gt;&lt;/div&gt;
+&lt;div class="section" id="reading-html-data"&gt;
+&lt;h3&gt;Reading &lt;span class="caps"&gt;HTML&lt;/span&gt;&amp;nbsp;data&lt;/h3&gt;
+&lt;pre class="code python literal-block"&gt;
+&lt;span class="n"&gt;website&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;http://www.realmadrid.com/&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;page&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="n"&gt;htmlTreeParse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;website&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;useInternal&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;xpathSApply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;//div[&amp;#64;class='m_schedule m_widget']/ul//li&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;xmlValue&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;
+&lt;ol class=list-inline&gt;
+    &lt;li&gt;&lt;span class="quo"&gt;&amp;#8216;&lt;/span&gt;
+
+    Liga &lt;span class="caps"&gt;BBVA&lt;/span&gt;
+
+    17-10-2015 - 16:00
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        Real Madrid
+        Levante
+
+
+
+
+  Por: C+ Liga
+                                            &lt;span class="caps"&gt;ENTRADAS&lt;/span&gt;&amp;nbsp;&amp;#8216;&lt;/li&gt;
+    &lt;li&gt;&lt;span class="quo"&gt;&amp;#8216;&lt;/span&gt;
+
+    Champions League
+
+    21-10-2015 - 20:45
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        Paris Saint-Germain
+        Real Madrid
+
+
+
+
+  Por: Bein Sports&amp;nbsp;&amp;#8216;&lt;/li&gt;
+    &lt;li&gt;&lt;span class="quo"&gt;&amp;#8216;&lt;/span&gt;
+
+    Liga &lt;span class="caps"&gt;BBVA&lt;/span&gt;
+
+    24-10-2015 - 16:00
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        Celta de Vigo
+        Real Madrid
+
+
+
+
+  Por: C+ Liga&amp;nbsp;&amp;#8216;&lt;/li&gt;
+&lt;/ol&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="references"&gt;
+&lt;h2&gt;References&lt;/h2&gt;
+&lt;div class="line-block"&gt;
+&lt;div class="line"&gt;&lt;a class="reference external" href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/tempfile.html"&gt;https://stat.ethz.ch/R-manual/R-devel/library/base/html/tempfile.html&lt;/a&gt; - Create Names for Temporary Files&lt;/div&gt;
+&lt;div class="line"&gt;&lt;a class="reference external" href="https://class.coursera.org/getdata-033/"&gt;https://class.coursera.org/getdata-033/&lt;/a&gt; - Getting and Cleaning Data&lt;/div&gt;
+&lt;div class="line"&gt;&lt;a class="reference external" href="https://stat.ethz.ch/R-manual/R-devel/library/utils/html/download.file.html"&gt;https://stat.ethz.ch/R-manual/R-devel/library/utils/html/download.file.html&lt;/a&gt; - Download File from the Internet&lt;/div&gt;
+&lt;div class="line"&gt;&lt;a class="reference external" href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/file.path.html"&gt;https://stat.ethz.ch/R-manual/R-devel/library/base/html/file.path.html&lt;/a&gt; - Construct Path to File&lt;/div&gt;
+&lt;div class="line"&gt;&lt;a class="reference external" href="http://api.football-data.org/index"&gt;http://api.football-data.org/index&lt;/a&gt; - Soccer data &lt;span class="caps"&gt;JSON&lt;/span&gt; sample&lt;/div&gt;
+&lt;div class="line"&gt;&lt;a class="reference external" href="http://finance.yahoo.com/q?s=VLO"&gt;http://finance.yahoo.com/q?s=&lt;span class="caps"&gt;VLO&lt;/span&gt;&lt;/a&gt; - Yahoo Finance data &lt;span class="caps"&gt;CSV&lt;/span&gt; sample&lt;/div&gt;
+&lt;div class="line"&gt;&lt;a class="reference external" href="https://stat.ethz.ch/R-manual/R-devel/library/utils/html/unzip.html"&gt;https://stat.ethz.ch/R-manual/R-devel/library/utils/html/unzip.html&lt;/a&gt; - Extract or List Zip Archives&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</summary><category term="quick-tips"></category></entry><entry><title>Recursion, Memoization and Dynamic Programming</title><link href="http://www.mimoralea.com/recursion-memoization-and-dynamic-programming.html" rel="alternate"></link><published>2015-09-08T13:39:00-05:00</published><author><name>Miguel Morales</name></author><id>tag:www.mimoralea.com,2015-09-08:recursion-memoization-and-dynamic-programming.html</id><summary type="html">&lt;p&gt;I wanted to quickly show the differences between these 3 very related computer science concepts that tend to be&amp;nbsp;mixed.&lt;/p&gt;
 &lt;p&gt;For that, I will work on a well know problem, the Fibonacci&amp;nbsp;series.&lt;/p&gt;
 &lt;p&gt;The Fibonacci series looks something like: 0, 1, 1, 2, 3, 5, 8, 13, 21 &amp;#8230; and so on. Any person with sufficient analytical skills would quickly notice the&amp;nbsp;pattern.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;f(n) = f(n-1) + f(n-2)&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;There are many ways someone can tackle this problem, the most intuitive one is&amp;nbsp;recursion.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fib&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fib&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;fib&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;fib&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -21,7 +473,7 @@
 &lt;p&gt;Now, the main problem of this algorithm is that we are computing some of the subproblems more than once. For instance, to compute &lt;code&gt;fib(4)&lt;/code&gt; we would compute &lt;code&gt;fib(3)&lt;/code&gt; and &lt;code&gt;fib(2)&lt;/code&gt;.
 However, to compute &lt;code&gt;fib(3)&lt;/code&gt; we also have to compute &lt;code&gt;fib(2)&lt;/code&gt;. Say hello to&amp;nbsp;memoization.&lt;/p&gt;
 &lt;p&gt;In memoization we are doing nothing but caching the results of previously computed sub&amp;nbsp;problems.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fibm&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
@@ -40,7 +492,7 @@ However, to compute &lt;code&gt;fib(3)&lt;/code&gt; we also have to compute &lt;
 &lt;p&gt;But the question is, can we do better than this? The use of the array is helpful, but when calculating very large numbers,
 or perhaps on memory contraint environments it might not be desirable. This is where Dynamic Programming fits the&amp;nbsp;bill.&lt;/p&gt;
 &lt;p&gt;In &lt;span class="caps"&gt;DP&lt;/span&gt; we take a bottom-up approach. Meaning, we solve the next Fibonacci number we can with the information we already&amp;nbsp;have.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fibdp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fibdp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
     &lt;span class="n"&gt;prev&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;curr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -60,28 +512,28 @@ or perhaps on memory contraint environments it might not be desirable. This is w
 &lt;/blockquote&gt;
 &lt;p&gt;Pretty cool,&amp;nbsp;isn&amp;#8217;t?&lt;/p&gt;
 &lt;p&gt;There is a lot of good information around the web to help you understand these methods better. I hope, however, that this post served you&amp;nbsp;well.&lt;/p&gt;
-&lt;p&gt;Keep&amp;nbsp;hacking!&lt;/p&gt;</summary></entry><entry><title>Dump R data for later reuse</title><link href="http://www.mimoralea.com/dump-r-data-for-later-reuse.html" rel="alternate"></link><updated>2015-08-12T12:10:00-05:00</updated><author><name>Miguel Morales</name></author><id>tag:www.mimoralea.com,2015-08-12:dump-r-data-for-later-reuse.html</id><summary type="html">&lt;p&gt;Nice! You are starting to do some &lt;code&gt;EDA&lt;/code&gt;, and found some cool features on the dataframe. However, time is up and you must continue at a later&amp;nbsp;time?&lt;/p&gt;
+&lt;p&gt;Keep&amp;nbsp;hacking!&lt;/p&gt;</summary></entry><entry><title>Dump R data for later reuse</title><link href="http://www.mimoralea.com/dump-r-data-for-later-reuse.html" rel="alternate"></link><published>2015-08-12T12:10:00-05:00</published><author><name>Miguel Morales</name></author><id>tag:www.mimoralea.com,2015-08-12:dump-r-data-for-later-reuse.html</id><summary type="html">&lt;p&gt;Nice! You are starting to do some &lt;code&gt;EDA&lt;/code&gt;, and found some cool features on the dataframe. However, time is up and you must continue at a later&amp;nbsp;time?&lt;/p&gt;
 &lt;p&gt;No problem, just save a dump of that object and load it back when you are ready to&amp;nbsp;continue!&lt;/p&gt;
 &lt;p&gt;Dump the&amp;nbsp;object:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kp"&gt;dump&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;df&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;2015-08-12-df.dump&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kp"&gt;dump&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;df&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;2015-08-12-df.dump&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Ready to continue with your exploration?&amp;nbsp;Sure:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;source&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;2015-08-12-df.dump&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;source&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;2015-08-12-df.dump&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Now, go get that break you needed and continue tomorrow&amp;nbsp;;)&lt;/p&gt;
-&lt;p&gt;Enjoy, and keep&amp;nbsp;hacking.&lt;/p&gt;</summary></entry><entry><title>Password-less ssh access one-liner</title><link href="http://www.mimoralea.com/password-less-ssh-access-one-liner.html" rel="alternate"></link><updated>2015-08-05T18:23:00-05:00</updated><author><name>Miguel Morales</name></author><id>tag:www.mimoralea.com,2015-08-05:password-less-ssh-access-one-liner.html</id><summary type="html">&lt;p&gt;So you are one of the guys that like to use a key pair to access your servers? Are you the one that ssh&amp;#8217;s into the server, creates an &lt;code&gt;authorized_keys&lt;/code&gt; file under the &lt;code&gt;.ssh&lt;/code&gt; folder and places his public key in&amp;nbsp;there?&lt;/p&gt;
+&lt;p&gt;Enjoy, and keep&amp;nbsp;hacking.&lt;/p&gt;</summary></entry><entry><title>Password-less ssh access one-liner</title><link href="http://www.mimoralea.com/password-less-ssh-access-one-liner.html" rel="alternate"></link><published>2015-08-05T18:23:00-05:00</published><author><name>Miguel Morales</name></author><id>tag:www.mimoralea.com,2015-08-05:password-less-ssh-access-one-liner.html</id><summary type="html">&lt;p&gt;So you are one of the guys that like to use a key pair to access your servers? Are you the one that ssh&amp;#8217;s into the server, creates an &lt;code&gt;authorized_keys&lt;/code&gt; file under the &lt;code&gt;.ssh&lt;/code&gt; folder and places his public key in&amp;nbsp;there?&lt;/p&gt;
 &lt;p&gt;Here is a nice short one-liner to do&amp;nbsp;that:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;ssh root@server &lt;span class="s2"&gt;&amp;quot;cat &amp;gt;&amp;gt; ~/.ssh/authorized_keys&amp;quot;&lt;/span&gt; &amp;lt; ~/.ssh/id_rsa.pub
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ssh root@server &lt;span class="s2"&gt;&amp;quot;cat &amp;gt;&amp;gt; ~/.ssh/authorized_keys&amp;quot;&lt;/span&gt; &amp;lt; ~/.ssh/id_rsa.pub
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;This one-liner will redirect the local public key into the &lt;code&gt;ssh&lt;/code&gt; command, which in turn will run the &lt;code&gt;cat&lt;/code&gt; to the contents of the redirect and append that into the remote &lt;code&gt;authorized_keys&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Bottom line, you end up with your local public key authorized in the remote server, thus a password-less access to&amp;nbsp;it.&lt;/p&gt;
-&lt;p&gt;Enjoy, and keep&amp;nbsp;hacking.&lt;/p&gt;</summary></entry><entry><title>Hello World</title><link href="http://www.mimoralea.com/hello-world.html" rel="alternate"></link><updated>2015-07-17T22:20:00-05:00</updated><author><name>Miguel Morales</name></author><id>tag:www.mimoralea.com,2015-07-17:hello-world.html</id><summary type="html">&lt;p&gt;Hey look ma! It&amp;#8217;s alive. No seriously, I will be posting on this blog weekly starting next month. Make sure you follow me on&amp;nbsp;twitter.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Hello, World!&amp;quot;&lt;/span&gt;
+&lt;p&gt;Enjoy, and keep&amp;nbsp;hacking.&lt;/p&gt;</summary></entry><entry><title>Hello World</title><link href="http://www.mimoralea.com/hello-world.html" rel="alternate"></link><published>2015-07-17T22:20:00-05:00</published><author><name>Miguel Morales</name></author><id>tag:www.mimoralea.com,2015-07-17:hello-world.html</id><summary type="html">&lt;p&gt;Hey look ma! It&amp;#8217;s alive. No seriously, I will be posting on this blog weekly starting next month. Make sure you follow me on&amp;nbsp;twitter.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Hello, World!&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;</summary></entry></feed>

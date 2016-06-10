@@ -19,7 +19,7 @@
 
     <title>
       mimoralea.com
-&ndash; Dump R data for later&nbsp;reuse    </title>
+&ndash; Installing Pianobar on Fedora&nbsp;23    </title>
 
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -69,33 +69,48 @@
       <div id="main_body">
 <article>
   <div class="article_title">
-    <h3><a href="./dump-r-data-for-later-reuse.html">Dump R data for later&nbsp;reuse</a></h3>
+    <h3><a href="./installing-pianobar-on-fedora-23.html">Installing Pianobar on Fedora&nbsp;23</a></h3>
   </div>
   <div class="article_text">
-    <p>Nice! You are starting to do some <code>EDA</code>, and found some cool features on the dataframe. However, time is up and you must continue at a later&nbsp;time?</p>
-<p>No problem, just save a dump of that object and load it back when you are ready to&nbsp;continue!</p>
-<p>Dump the&nbsp;object:</p>
-<div class="highlight"><pre><span></span><span class="kp">dump</span><span class="p">(</span><span class="s">&quot;df&quot;</span><span class="p">,</span> <span class="s">&quot;2015-08-12-df.dump&quot;</span><span class="p">)</span>
+    <p>Pandora and pianobar are almost as important &#8216;tools&#8217; on my development workflow as git and Emacs are. Not true, but sometimes I&#8217;m in the mood and capable of coding and listening to good music. Here is a quick tip on how to install pianobar on a Fedora&nbsp;system.</p>
+<p>We start by cloning the&nbsp;repository:</p>
+<div class="highlight"><pre><span></span>git clone git@github.com:PromyLOPh/pianobar.git
 </pre></div>
 
 
-<p>Ready to continue with your exploration?&nbsp;Sure:</p>
-<div class="highlight"><pre><span></span><span class="kn">source</span><span class="p">(</span><span class="s">&quot;2015-08-12-df.dump&quot;</span><span class="p">)</span>
+<p>Let&#8217;s install all the make dependencies at once, thank me&nbsp;later:</p>
+<div class="highlight"><pre><span></span>sudo dnf groupinstall -y <span class="s2">&quot;Development Tools&quot;</span> <span class="s2">&quot;Development Libraries&quot;</span>
+sudo dnf install -y http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-stable.noarch.rpm
+sudo dnf install -y libcurl libcurl-devel make automake gcc gcc-c++ kernel-devel ffmpeg ffmpeg-devel libgcrypt libgcrypt-devel libao libao-devel json-c json-c-devel
 </pre></div>
 
 
-<p>Now, go get that break you needed and continue tomorrow&nbsp;;)</p>
-<p>Enjoy, and keep&nbsp;hacking.</p>
+<p>Next, build pianobar and&nbsp;install:</p>
+<div class="highlight"><pre><span></span><span class="nb">cd</span> pianobar
+gmake clean
+gmake
+sudo gmake install
+</pre></div>
+
+
+<p>Now, lets configure&nbsp;it:</p>
+<div class="highlight"><pre><span></span>mkdir ~/.config/pianobar
+cp contrib/config-example ~/.config/pianobar/config
+</pre></div>
+
+
+<p>Go edit that file and add your Pandora username, password and set the <code>autostart_station</code> to your favorite personal station. That&#8217;s&nbsp;it!</p>
+<p>Put your headsets on, type <code>pianobar</code> and keep coding&nbsp;away!</p>
   </div>
   <div class="article_meta">
-    <p>Posted on: Wed 12 August 2015</p>
+    <p>Posted on: Fri 10 June 2016</p>
     <p>Category: <a href="./category/quick-tips.html">quick-tips</a>
     </p>
   </div>
   <div id="article_comments">
     <div id="disqus_thread"></div>
     <script type="text/javascript">
-      var disqus_identifier = "dump-r-data-for-later-reuse.html";
+      var disqus_identifier = "installing-pianobar-on-fedora-23.html";
       (function() {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
       dsq.src = 'http://mimoralea.disqus.com/embed.js';
