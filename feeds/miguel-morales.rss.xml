@@ -26,7 +26,7 @@ cp contrib/config-example ~/.config/pianobar/config
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Go edit that file and add your Pandora username, password and set the &lt;code&gt;autostart_station&lt;/code&gt; to your favorite personal station. That&amp;#8217;s&amp;nbsp;it!&lt;/p&gt;
+&lt;p&gt;Go edit that file and add your Pandora username, password and set the &lt;code&gt;autostart_station&lt;/code&gt; to your favorite personal station. To make pianobar&amp;#8217;s output show in color uncomment the 3 format string lines. That&amp;#8217;s&amp;nbsp;it!&lt;/p&gt;
 &lt;p&gt;Put your headsets on, type &lt;code&gt;pianobar&lt;/code&gt; and keep coding&amp;nbsp;away!&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Miguel Morales</dc:creator><pubDate>Fri, 10 Jun 2016 14:05:00 -0500</pubDate><guid isPermaLink="false">tag:www.mimoralea.com,2016-06-10:installing-pianobar-on-fedora-23.html</guid></item><item><title>Installing Docker on Fedora 23</title><link>http://www.mimoralea.com/installing-docker-on-fedora-23.html</link><description>&lt;p&gt;So, for some reason every time I have to install Docker on Fedora I get a couple of bumps along the way. So, I wanted to leave a brief tip on how to get it installed without permission issues and without having to log out of the system. Here we&amp;nbsp;go:&lt;/p&gt;
 &lt;p&gt;First, rather obvious, you have to install the&amp;nbsp;package:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo dnf -y install docker-io
