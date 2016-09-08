@@ -533,7 +533,4 @@ or perhaps on memory contraint environments it might not be desirable. This is w
 
 &lt;p&gt;This one-liner will redirect the local public key into the &lt;code&gt;ssh&lt;/code&gt; command, which in turn will run the &lt;code&gt;cat&lt;/code&gt; to the contents of the redirect and append that into the remote &lt;code&gt;authorized_keys&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Bottom line, you end up with your local public key authorized in the remote server, thus a password-less access to&amp;nbsp;it.&lt;/p&gt;
-&lt;p&gt;Enjoy, and keep&amp;nbsp;hacking.&lt;/p&gt;</summary></entry><entry><title>Hello World</title><link href="http://www.mimoralea.com/hello-world.html" rel="alternate"></link><published>2015-07-17T22:20:00-05:00</published><author><name>Miguel Morales</name></author><id>tag:www.mimoralea.com,2015-07-17:hello-world.html</id><summary type="html">&lt;p&gt;Hey look ma! It&amp;#8217;s alive. No seriously, I will be posting on this blog weekly starting next month. Make sure you follow me on&amp;nbsp;twitter.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Hello, World!&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary></entry></feed>
+&lt;p&gt;Enjoy, and keep&amp;nbsp;hacking.&lt;/p&gt;</summary></entry></feed>

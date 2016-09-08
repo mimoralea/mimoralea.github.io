@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>mimoralea.com</title><link href="http://www.mimoralea.com/" rel="alternate"></link><link href="http://www.mimoralea.com/feeds/thoughts.atom.xml" rel="self"></link><id>http://www.mimoralea.com/</id><updated>2015-07-17T22:20:00-05:00</updated><entry><title>Hello World</title><link href="http://www.mimoralea.com/hello-world.html" rel="alternate"></link><published>2015-07-17T22:20:00-05:00</published><author><name>Miguel Morales</name></author><id>tag:www.mimoralea.com,2015-07-17:hello-world.html</id><summary type="html">&lt;p&gt;Hey look ma! It&amp;#8217;s alive. No seriously, I will be posting on this blog weekly starting next month. Make sure you follow me on&amp;nbsp;twitter.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Hello, World!&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary></entry></feed>
