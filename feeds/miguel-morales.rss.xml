@@ -634,13 +634,13 @@ or perhaps on memory contraint environments it might not be desirable. This is w
 &lt;p&gt;There is a lot of good information around the web to help you understand these methods better. I hope, however, that this post served you&amp;nbsp;well.&lt;/p&gt;
 &lt;p&gt;Keep&amp;nbsp;hacking!&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Miguel Morales</dc:creator><pubDate>Tue, 08 Sep 2015 13:39:00 -0500</pubDate><guid isPermaLink="false">tag:www.mimoralea.com,2015-09-08:recursion-memoization-and-dynamic-programming.html</guid></item><item><title>Dump R data for later reuse</title><link>http://www.mimoralea.com/dump-r-data-for-later-reuse.html</link><description>&lt;p&gt;Nice! You are starting to do some &lt;code&gt;EDA&lt;/code&gt;, and found some cool features on the dataframe. However, time is up and you must continue at a later&amp;nbsp;time?&lt;/p&gt;
 &lt;p&gt;No problem, just save a dump of that object and load it back when you are ready to&amp;nbsp;continue!&lt;/p&gt;
-&lt;p&gt;Dump the&amp;nbsp;object:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kp"&gt;dump&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;df&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;2015-08-12-df.dump&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;p&gt;Save the&amp;nbsp;object:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kp"&gt;save&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;df&lt;span class="p"&gt;,&lt;/span&gt; file&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;2015-08-12-df.RData&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Ready to continue with your exploration?&amp;nbsp;Sure:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;source&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;2015-08-12-df.dump&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kp"&gt;load&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;2015-08-12-df.RData&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
