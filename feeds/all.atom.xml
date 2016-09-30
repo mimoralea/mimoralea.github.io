@@ -1,5 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>mimoralea.com</title><link href="http://www.mimoralea.com/" rel="alternate"></link><link href="http://www.mimoralea.com/feeds/all.atom.xml" rel="self"></link><id>http://www.mimoralea.com/</id><updated>2016-06-10T14:05:00-05:00</updated><entry><title>Installing Pianobar on Fedora 23</title><link href="http://www.mimoralea.com/installing-pianobar-on-fedora-23.html" rel="alternate"></link><published>2016-06-10T14:05:00-05:00</published><author><name>Miguel Morales</name></author><id>tag:www.mimoralea.com,2016-06-10:installing-pianobar-on-fedora-23.html</id><summary type="html">&lt;p&gt;Pandora and pianobar are almost as important &amp;#8216;tools&amp;#8217; on my development workflow as git and Emacs are. Not true, but sometimes I&amp;#8217;m in the mood and capable of coding and listening to good music. Here is a quick tip on how to install pianobar on a Fedora&amp;nbsp;system.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>mimoralea.com</title><link href="http://www.mimoralea.com/" rel="alternate"></link><link href="http://www.mimoralea.com/feeds/all.atom.xml" rel="self"></link><id>http://www.mimoralea.com/</id><updated>2016-09-29T16:59:00-05:00</updated><entry><title>Minimalist Deep [Reinforcement] Learning Build</title><link href="http://www.mimoralea.com/minimalist-deep-reinforcement-learning-build.html" rel="alternate"></link><published>2016-09-29T16:59:00-05:00</published><author><name>Miguel Morales</name></author><id>tag:www.mimoralea.com,2016-09-29:minimalist-deep-reinforcement-learning-build.html</id><summary type="html">&lt;h2&gt;Intro&lt;/h2&gt;
+&lt;p&gt;So after having some fun building &lt;a href="https://github.com/mimoralea/king-pong"&gt;King-Pong&lt;/a&gt;, 
+and having to actually wait for that fun while training its &lt;span class="caps"&gt;NN&lt;/span&gt;, I decided to step it up
+a bit and build a system that is overall efficient. I like concise solutions; that is 
+solutions that solve a problem with a minimum amount of fluff. Not for any reason I
+drive a &lt;a href="https://www.google.com/search?q=scion+iq&amp;amp;espv=2&amp;amp;biw=1278&amp;amp;bih=803&amp;amp;source=lnms&amp;amp;tbm=isch&amp;amp;sa=X&amp;amp;ved=0ahUKEwjNj5XZyrXPAhVMSCYKHQf7Bd4Q_AUIBigB"&gt;Scion &lt;span class="caps"&gt;IQ&lt;/span&gt;&lt;/a&gt;, 
+or type on a &lt;a href="https://www.google.com/search?q=happy+hacking+keyboard&amp;amp;biw=1278&amp;amp;bih=803&amp;amp;source=lnms&amp;amp;tbm=isch&amp;amp;sa=X&amp;amp;sqi=2&amp;amp;ved=0ahUKEwjJlfj0yrXPAhUC4iYKHf12AfEQ_AUIBygC"&gt;Happy Hacking Keyboard&lt;/a&gt;, 
+just to mention a&amp;nbsp;few.&lt;/p&gt;
+&lt;p&gt;For this reason, &lt;a href="http://pcpartpicker.com/user/mimoralea/saved/#view=N9KZLk"&gt;I built a ~$1,500 machine for doing Deep Learning&lt;/a&gt;. I selected a
+Mini tower with everything necessary and nothing&amp;nbsp;extra.&lt;/p&gt;
+&lt;p&gt;Ready for the breakdown? Here we&amp;nbsp;go:&lt;/p&gt;
+&lt;h2&gt;Parts&lt;/h2&gt;
+&lt;h3&gt;Motherboard&lt;/h3&gt;
+&lt;p&gt;For the motherboard I went with Asus &lt;span class="caps"&gt;ROG&lt;/span&gt; &lt;span class="caps"&gt;MAXIMUS&lt;/span&gt; &lt;span class="caps"&gt;VIII&lt;/span&gt; &lt;span class="caps"&gt;GENE&lt;/span&gt;. Reason&amp;nbsp;why:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Cost effective, at about $200 there is very little&amp;nbsp;competetion.&lt;/li&gt;
+&lt;li&gt;4 slots for &lt;span class="caps"&gt;RAM&lt;/span&gt; which is more than&amp;nbsp;enough.&lt;/li&gt;
+&lt;li&gt;&lt;span class="caps"&gt;USB&lt;/span&gt; 3.0 and&amp;nbsp;3.1.&lt;/li&gt;
+&lt;li&gt;&lt;span class="caps"&gt;LGA1151&lt;/span&gt;, sure it&amp;#8217;s not compatible with 40 lane &lt;span class="caps"&gt;CPU&lt;/span&gt;&amp;#8217;s, but &lt;a href="https://www.youtube.com/watch?v=rctaLgK5stA"&gt;I would argue it&amp;#8217;s not a&amp;nbsp;problem&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;6 &lt;span class="caps"&gt;SATA&lt;/span&gt;&amp;nbsp;6Gb/s&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Processor&lt;/h3&gt;
+&lt;p&gt;For the processor I selected an &lt;strong&gt;Intel Core i5 6600K 3.50 GHz&lt;/strong&gt;. It is really 
+the best bang for the buck. Also, remember that a faster processor would
+probably not make an impact on your Deep Learning tasks. Higher speed
+are really only necessary if you will be doing video editing or 
+perhaps running multiple virtual machines. But remember, we are keeping
+this build&amp;nbsp;simple.&lt;/p&gt;
+&lt;h3&gt;Memory&lt;/h3&gt;
+&lt;p&gt;I went with the &lt;strong&gt;Kingston HyperX &lt;span class="caps"&gt;FURY&lt;/span&gt; Black &lt;span class="caps"&gt;32GB&lt;/span&gt; Kit&lt;/strong&gt;. Sure, that was a little
+greedy, I have to agree there. Maybe we call this build &lt;a href="https://en.wikipedia.org/wiki/Multi-armed_bandit#Semi-uniform_strategies"&gt;Epsilon-Greedy&lt;/a&gt;?&lt;/p&gt;
+&lt;h3&gt;&lt;span class="caps"&gt;GPU&lt;/span&gt;&lt;/h3&gt;
+&lt;p&gt;For the &lt;span class="caps"&gt;GPU&lt;/span&gt; I chose to go with 2 x &lt;strong&gt;&lt;span class="caps"&gt;MSI&lt;/span&gt; &lt;span class="caps"&gt;GAMING&lt;/span&gt; GeForce &lt;span class="caps"&gt;GTX&lt;/span&gt; 980 &lt;span class="caps"&gt;4GB&lt;/span&gt; &lt;span class="caps"&gt;OC&lt;/span&gt;&lt;/strong&gt;. 
+I bought these second hand in very good&amp;nbsp;condition. &lt;/p&gt;
+&lt;p&gt;Now, am I happy with&amp;nbsp;them?&lt;/p&gt;
+&lt;p&gt;I can say that I would prefer getting only 1. I check the speed improvements on multi-gpu
+setup and the improvement from 1 to 2 is very minimal. In fact, a recent &lt;a href="https://research.googleblog.com/2016/04/announcing-tensorflow-08-now-with.html"&gt;blog post&lt;/a&gt;
+by Google Research shows this&amp;nbsp;graph:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="alt img" src="https://1.bp.blogspot.com/-3e8ukpeMD5g/Vw5r8lIuUQI/AAAAAAAAA-g/UEHdwqD1YKwVrUKDzKpy356yxo_0xJW6ACLcB/s1600/image00.png" /&gt;&lt;/p&gt;
+&lt;p&gt;For this reason, I would actually recommend getting a better card, E.g. &lt;span class="caps"&gt;GTX&lt;/span&gt; 1080 instead, 
+you&amp;#8217;ll be paying a little for double the &lt;span class="caps"&gt;RAM&lt;/span&gt;&amp;nbsp;capacity.&lt;/p&gt;
+&lt;h3&gt;Case&lt;/h3&gt;
+&lt;p&gt;I got the &lt;strong&gt;Cooler Master Silencio 352&lt;/strong&gt; to host all of these components. 
+I&amp;#8217;m very happy with it, it is silent enough. Though, if you are looking for a
+totally silent built, this might not be the best&amp;nbsp;bet.&lt;/p&gt;
+&lt;p&gt;Also, I had to remove a couple of things to make everything fit nicely.
+I added some pictures so you guys can save some&amp;nbsp;time.&lt;/p&gt;
+&lt;h3&gt;&lt;span class="caps"&gt;PSU&lt;/span&gt;&lt;/h3&gt;
+&lt;p&gt;For the &lt;span class="caps"&gt;PSU&lt;/span&gt;, I got one of the highest quality. In terms of capacity, 
+this is sufficient for this build: &lt;strong&gt;&lt;span class="caps"&gt;EVGA&lt;/span&gt; SuperNOVA 850 P2, 80+ &lt;span class="caps"&gt;PLATINUM&lt;/span&gt; 850W&lt;/strong&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;span class="caps"&gt;CPU&lt;/span&gt; &lt;span class="caps"&gt;FAN&lt;/span&gt;&lt;/h3&gt;
+&lt;p&gt;Long time I don&amp;#8217;t buy a &lt;span class="caps"&gt;CPU&lt;/span&gt;, didn&amp;#8217;t know that you had to buy the cooler separatedly!
+Anyhow, the &lt;strong&gt;Corsair Hydro Series H100i v2 Extreme Performance Liquid &lt;span class="caps"&gt;CPU&lt;/span&gt; Cooler&lt;/strong&gt; 
+proved to be&amp;nbsp;excellent.&lt;/p&gt;
+&lt;h3&gt;Storage&lt;/h3&gt;
+&lt;p&gt;I bought 6 &lt;span class="caps"&gt;SSD&lt;/span&gt; drives with the intention to put them on a &lt;span class="caps"&gt;RAID&lt;/span&gt; 10 array. Maybe a lot 
+faster than needed, but I wanted to make sure I gain speed and at the same time
+I have failure tolerance. Now, I&amp;#8217;ll be putting these &lt;span class="caps"&gt;RAID&lt;/span&gt; 10 on the motherboard so even
+the boot partition should be on top of several drives. I went with &lt;strong&gt;6 x Samsung 840 &lt;span class="caps"&gt;EVO&lt;/span&gt; &lt;span class="caps"&gt;120GB&lt;/span&gt;&lt;/strong&gt;.&lt;/p&gt;
+&lt;h3&gt;Others&lt;/h3&gt;
+&lt;p&gt;Here are some other things that I got for finishing the&amp;nbsp;build:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;span class="caps"&gt;ICY&lt;/span&gt; &lt;span class="caps"&gt;DOCK&lt;/span&gt; &lt;span class="caps"&gt;FLEX&lt;/span&gt;-&lt;span class="caps"&gt;FIT&lt;/span&gt; Quattro &lt;span class="caps"&gt;MB344SP&lt;/span&gt;&lt;/strong&gt; - The case allows you to put 4 drives. 
+This add-on is basically a &lt;span class="caps"&gt;DVD&lt;/span&gt;-to-4-ssd. Very easy to&amp;nbsp;install.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;span class="caps"&gt;LG&lt;/span&gt; &lt;span class="caps"&gt;29UM68&lt;/span&gt;-P 29-Inch 21:9 UltraWide &lt;span class="caps"&gt;IPS&lt;/span&gt; Monitor&lt;/strong&gt; - Yeah, yeah, 
+a weird ratio, but for using &lt;a href="https://www.archlinux.org/"&gt;Arch Linux&lt;/a&gt; and &lt;a href="http://i3wm.org/"&gt;I3&lt;/a&gt; 
+is amazing! And yeah, only 1 monitor. I don&amp;#8217;t believe in &amp;#8220;multi-tasking&amp;#8221;. 
+I believe in&amp;nbsp;focus.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;AmazonBasics Single Monitor Display Mounting Arm&lt;/strong&gt; - Honestly, the best monitor arm I ever&amp;nbsp;owned.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Build&lt;/h1&gt;
+&lt;p&gt;Got most of the parts at the same time. To be fair, I already had 
+some of the drives and one of the GPUs. Here is a pic of the first&amp;nbsp;delivery:&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/gallery/silencio/parts.jpg" width="600px"&gt;&lt;/p&gt;
+&lt;p&gt;Later that week I got the other used &lt;span class="caps"&gt;GPU&lt;/span&gt;. Obviously, I didn&amp;#8217;t want to 
+try anything different so I went with the exact model I already&amp;nbsp;had:&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/gallery/silencio/gpus.jpg" width="600px"&gt;&lt;/p&gt;
+&lt;p&gt;Here, I started building the system. First open up the mother&amp;nbsp;board:&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/gallery/silencio/mb.jpg" width="600px"&gt;&lt;/p&gt;
+&lt;p&gt;Put the memory&amp;nbsp;in:&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/gallery/silencio/cpu.jpg" width="600px"&gt;&lt;/p&gt;
+&lt;p&gt;Now, I started to mess with the case. Here I inserted the &lt;span class="caps"&gt;CPU&lt;/span&gt; 
+Cooler, this was rather challenging to fit. One manual recommended
+to attach the fan on the outside, the other on the inside. I went
+with the outside first, but then the front cover would not close.
+At the end, I put the fans on the inside. Here is a pic of the&amp;nbsp;cooler:&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/gallery/silencio/cpu-cooler.jpg" width="600px"&gt;&lt;/p&gt;
+&lt;p&gt;What, you tired already?? We just getting&amp;nbsp;started!&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/gallery/silencio/tired-puppy-started.jpg" width="600px"&gt;&lt;/p&gt;
+&lt;p&gt;Here I inserted the &lt;span class="caps"&gt;MB&lt;/span&gt; into the case. Tight&amp;nbsp;fit!&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/gallery/silencio/ram.jpg" width="600px"&gt;&lt;/p&gt;
+&lt;p&gt;Place the GPUs&amp;nbsp;inside:&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/gallery/silencio/motherboard-closeup.jpg" width="600px"&gt;&lt;/p&gt;
+&lt;p&gt;Yeah, she is&amp;nbsp;done:&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/gallery/silencio/tired-puppy.jpg" width="600px"&gt;&lt;/p&gt;
+&lt;p&gt;Later, I got the accessory for the extra drives. I really liked this&amp;nbsp;one:&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/gallery/silencio/drives.jpg" width="500px"&gt;&lt;/p&gt;
+&lt;p&gt;I got 4 drives here and 2 inside. Helps with the clutter. After all, who in the world uses &lt;span class="caps"&gt;DVD&lt;/span&gt; drives anymore?!&amp;nbsp;:)&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/gallery/silencio/drives-inserted.jpg" width="500px"&gt;&lt;/p&gt;
+&lt;p&gt;Look at it. There you can see the &lt;span class="caps"&gt;PSU&lt;/span&gt;&amp;nbsp;too.&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/gallery/silencio/opening-all.jpg" width="600px"&gt;&lt;/p&gt;
+&lt;p&gt;It was a nice&amp;nbsp;build.&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/gallery/silencio/psu-gpus-etc.jpg" width="600px"&gt;&lt;/p&gt;
+&lt;p&gt;Oh yeah, the case&amp;#8230; This is how the final product looks&amp;nbsp;like:&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/gallery/silencio/hash.jpg" width="600px"&gt;&lt;/p&gt;
+&lt;h1&gt;References&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://timdettmers.com/2014/08/14/which-gpu-for-deep-learning/"&gt;Tim Dettmers - Which &lt;span class="caps"&gt;GPU&lt;/span&gt;(s) to Get&amp;nbsp;&amp;#8230;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://timdettmers.com/2015/03/09/deep-learning-hardware-guide/"&gt;Tim Dettmers - A Full Hardware Guide&amp;nbsp;&amp;#8230;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://timdettmers.com/2014/09/21/how-to-build-and-use-a-multi-gpu-system-for-deep-learning/"&gt;Tim Dettmers - How To Build and Use a Multi &lt;span class="caps"&gt;GPU&lt;/span&gt;&amp;nbsp;&amp;#8230;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://graphific.github.io/posts/building-a-deep-learning-dream-machine/"&gt;Roelof Pieters - Building a Deep Learning&amp;nbsp;&amp;#8230;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.kdnuggets.com/2016/06/build-deep-learning-box.html"&gt;Hui Han Chin - How to Build Your Own Deep&amp;nbsp;&amp;#8230;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.youtube.com/user/LinusTechTips"&gt;LinusTechTips - Several Videos, highly&amp;nbsp;recommended.&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;It was a fun build, I&amp;#8217;m typing on it now. Tensorflow works well. The extra &lt;span class="caps"&gt;GPU&lt;/span&gt; is 
+really not that good I get an improvement of about 20 seconds on a 8 minute task. 
+I wouldn&amp;#8217;t get the second &lt;span class="caps"&gt;GPU&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Join me next time I&amp;#8217;ll be installing a minimalist &lt;span class="caps"&gt;OS&lt;/span&gt;, Arch Linux with 
+I3, Emacs, Vim, Tensorflow and so on. Remember, only the&amp;nbsp;necessary.&lt;/p&gt;
+&lt;p&gt;See you next&amp;nbsp;time!&lt;/p&gt;</summary></entry><entry><title>Installing Pianobar on Fedora 23</title><link href="http://www.mimoralea.com/installing-pianobar-on-fedora-23.html" rel="alternate"></link><published>2016-06-10T14:05:00-05:00</published><author><name>Miguel Morales</name></author><id>tag:www.mimoralea.com,2016-06-10:installing-pianobar-on-fedora-23.html</id><summary type="html">&lt;p&gt;Pandora and pianobar are almost as important &amp;#8216;tools&amp;#8217; on my development workflow as git and Emacs are. Not true, but sometimes I&amp;#8217;m in the mood and capable of coding and listening to good music. Here is a quick tip on how to install pianobar on a Fedora&amp;nbsp;system.&lt;/p&gt;
 &lt;p&gt;We start by cloning the&amp;nbsp;repository:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git clone git@github.com:PromyLOPh/pianobar.git
 &lt;/pre&gt;&lt;/div&gt;
