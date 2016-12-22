@@ -1,5 +1,445 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>mimoralea.com</title><link href="http://www.mimoralea.com/" rel="alternate"></link><link href="http://www.mimoralea.com/feeds/all-en.atom.xml" rel="self"></link><id>http://www.mimoralea.com/</id><updated>2016-09-29T16:59:00-05:00</updated><entry><title>Minimalist Deep [Reinforcement] Learning Build</title><link href="http://www.mimoralea.com/minimalist-deep-reinforcement-learning-build.html" rel="alternate"></link><published>2016-09-29T16:59:00-05:00</published><updated>2016-09-29T16:59:00-05:00</updated><author><name>Miguel Morales</name></author><id>tag:www.mimoralea.com,2016-09-29:minimalist-deep-reinforcement-learning-build.html</id><summary type="html">&lt;h2&gt;Intro&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>mimoralea.com</title><link href="http://www.mimoralea.com/" rel="alternate"></link><link href="http://www.mimoralea.com/feeds/all-en.atom.xml" rel="self"></link><id>http://www.mimoralea.com/</id><updated>2016-12-17T10:52:00-06:00</updated><entry><title>Getting Started With NVIDIA GPU, Anaconda, TensorFlow and Keras on Arch Linux</title><link href="http://www.mimoralea.com/getting-started-with-nvidia-gpu-anaconda-tensorflow-and-keras-on-arch-linux.html" rel="alternate"></link><published>2016-12-17T10:52:00-06:00</published><updated>2016-12-17T10:52:00-06:00</updated><author><name>Miguel Morales</name></author><id>tag:www.mimoralea.com,2016-12-17:getting-started-with-nvidia-gpu-anaconda-tensorflow-and-keras-on-arch-linux.html</id><summary type="html">&lt;h2&gt;Intro&lt;/h2&gt;
+&lt;p&gt;This is actually a pretty simple setup. First, we will install &lt;span class="caps"&gt;NVIDIA&lt;/span&gt; drivers and &lt;span class="caps"&gt;CUDA&lt;/span&gt;,
+then we will install Anaconda, Tensorflow binaries for GPUs, and&amp;nbsp;Keras.&lt;/p&gt;
+&lt;h3&gt;Install &lt;span class="caps"&gt;NVIDIA&lt;/span&gt;&amp;nbsp;drivers&lt;/h3&gt;
+&lt;p&gt;Let&amp;#8217;s first install the drivers and&amp;nbsp;cuda:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yaourt -S nvidia nvidia-utils cuda
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now, you need to go to &lt;span class="caps"&gt;NVIDIA&lt;/span&gt;&amp;#8217;s website and download the
+&lt;a href="https://developer.nvidia.com/cudnn"&gt;cuDNN tarball&lt;/a&gt;. Just place the file on your &amp;#8220;Downloads&amp;#8221;&amp;nbsp;folder.&lt;/p&gt;
+&lt;p&gt;Next, we install the package&amp;nbsp;with:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yaourt -S cudnn
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This should install all &lt;span class="caps"&gt;NVIDIA&lt;/span&gt; dependencies. Let&amp;#8217;s go now and install&amp;nbsp;Anaconda.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yaourt -S anaconda
+&lt;span class="c1"&gt;# add a pointer to anaconda&amp;#39;s binaries to your path and load it on your open session&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;export PATH=&amp;quot;&lt;/span&gt;/opt/anaconda/bin:&lt;span class="nv"&gt;$PATH&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;  ~/.bash_profile
+&lt;span class="nb"&gt;source&lt;/span&gt; ~/.bash_profile
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;At this point you can check your installation with &lt;code&gt;anaconda --version &amp;amp;&amp;amp; conda --version&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Let&amp;#8217;s create an environment and install TensorFlow and&amp;nbsp;Keras:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;conda create -n deep-learning
+&lt;span class="nb"&gt;source&lt;/span&gt; activate deep-learning
+&lt;span class="c1"&gt;# at the time of writing this is the lastest binary for GPUs&lt;/span&gt;
+&lt;span class="c1"&gt;# go to https://www.tensorflow.org/get_started/os_setup&lt;/span&gt;
+&lt;span class="c1"&gt;# and grab the equivalent &amp;quot;linux, gpu, python 3.5&amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;TF_BINARY_URL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-0.12.0-cp35-cp35m-linux_x86_64.whl
+pip3 install --upgrade &lt;span class="nv"&gt;$TF_BINARY_URL&lt;/span&gt;
+pip3 install ipython
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now, you should be able to enter on an interactive Python session and load TensorFlow.
+Your output should look as&amp;nbsp;below:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;deep-learning&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;mimoralea@hash ~&lt;span class="o"&gt;]&lt;/span&gt;$ ipython
+Python 3.5.2 &lt;span class="p"&gt;|&lt;/span&gt;Anaconda custom &lt;span class="o"&gt;(&lt;/span&gt;64-bit&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;default, Jul  &lt;span class="m"&gt;2&lt;/span&gt; 2016, 17:53:06&lt;span class="o"&gt;)&lt;/span&gt; 
+Type &lt;span class="s2"&gt;&amp;quot;copyright&amp;quot;&lt;/span&gt;, &lt;span class="s2"&gt;&amp;quot;credits&amp;quot;&lt;/span&gt; or &lt;span class="s2"&gt;&amp;quot;license&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; more information.
+
+IPython 5.1.0 -- An enhanced Interactive Python.
+?         -&amp;gt; Introduction and overview of IPython&lt;span class="s1"&gt;&amp;#39;s features.&lt;/span&gt;
+&lt;span class="s1"&gt;%quickref -&amp;gt; Quick reference.&lt;/span&gt;
+&lt;span class="s1"&gt;help      -&amp;gt; Python&amp;#39;&lt;/span&gt;s own &lt;span class="nb"&gt;help&lt;/span&gt; system.
+object?   -&amp;gt; Details about &lt;span class="s1"&gt;&amp;#39;object&amp;#39;&lt;/span&gt;, use &lt;span class="s1"&gt;&amp;#39;object??&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; extra details.
+
+In &lt;span class="o"&gt;[&lt;/span&gt;1&lt;span class="o"&gt;]&lt;/span&gt;: import tensorflow
+I tensorflow/stream_executor/dso_loader.cc:128&lt;span class="o"&gt;]&lt;/span&gt; successfully opened CUDA library libcublas.so locally
+I tensorflow/stream_executor/dso_loader.cc:128&lt;span class="o"&gt;]&lt;/span&gt; successfully opened CUDA library libcudnn.so locally
+I tensorflow/stream_executor/dso_loader.cc:128&lt;span class="o"&gt;]&lt;/span&gt; successfully opened CUDA library libcufft.so locally
+I tensorflow/stream_executor/dso_loader.cc:128&lt;span class="o"&gt;]&lt;/span&gt; successfully opened CUDA library libcuda.so.1 locally
+I tensorflow/stream_executor/dso_loader.cc:128&lt;span class="o"&gt;]&lt;/span&gt; successfully opened CUDA library libcurand.so locally
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Great, now install Keras, configure it and test&amp;nbsp;it.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip3 install keras
+mkdir ~/.keras
+vi ~/.keras/keras.json
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Add the keras config with these&amp;nbsp;values:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;quot;image_dim_ordering&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;tf&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;quot;epsilon&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1e-07&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;quot;backend&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;tensorflow&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;quot;floatx&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;float32&amp;quot;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Finally, test the end to end&amp;nbsp;installation:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;deep-learning&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;mimoralea@hash ~&lt;span class="o"&gt;]&lt;/span&gt;$ ipython
+Python 3.5.2 &lt;span class="p"&gt;|&lt;/span&gt;Anaconda custom &lt;span class="o"&gt;(&lt;/span&gt;64-bit&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;default, Jul  &lt;span class="m"&gt;2&lt;/span&gt; 2016, 17:53:06&lt;span class="o"&gt;)&lt;/span&gt; 
+Type &lt;span class="s2"&gt;&amp;quot;copyright&amp;quot;&lt;/span&gt;, &lt;span class="s2"&gt;&amp;quot;credits&amp;quot;&lt;/span&gt; or &lt;span class="s2"&gt;&amp;quot;license&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; more information.
+
+IPython 5.1.0 -- An enhanced Interactive Python.
+?         -&amp;gt; Introduction and overview of IPython&lt;span class="s1"&gt;&amp;#39;s features.&lt;/span&gt;
+&lt;span class="s1"&gt;%quickref -&amp;gt; Quick reference.&lt;/span&gt;
+&lt;span class="s1"&gt;help      -&amp;gt; Python&amp;#39;&lt;/span&gt;s own &lt;span class="nb"&gt;help&lt;/span&gt; system.
+object?   -&amp;gt; Details about &lt;span class="s1"&gt;&amp;#39;object&amp;#39;&lt;/span&gt;, use &lt;span class="s1"&gt;&amp;#39;object??&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; extra details.
+
+In &lt;span class="o"&gt;[&lt;/span&gt;1&lt;span class="o"&gt;]&lt;/span&gt;: import keras
+Using TensorFlow backend.
+I tensorflow/stream_executor/dso_loader.cc:128&lt;span class="o"&gt;]&lt;/span&gt; successfully opened CUDA library libcublas.so locally
+I tensorflow/stream_executor/dso_loader.cc:128&lt;span class="o"&gt;]&lt;/span&gt; successfully opened CUDA library libcudnn.so locally
+I tensorflow/stream_executor/dso_loader.cc:128&lt;span class="o"&gt;]&lt;/span&gt; successfully opened CUDA library libcufft.so locally
+I tensorflow/stream_executor/dso_loader.cc:128&lt;span class="o"&gt;]&lt;/span&gt; successfully opened CUDA library libcuda.so.1 locally
+I tensorflow/stream_executor/dso_loader.cc:128&lt;span class="o"&gt;]&lt;/span&gt; successfully opened CUDA library libcurand.so locally
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Did you see &amp;#8220;Using TensorFlow backend.&amp;#8221;? That was Keras right there. Well&amp;nbsp;done!&lt;/p&gt;
+&lt;p&gt;Let&amp;#8217;s do a quick&amp;nbsp;test:&lt;/p&gt;
+&lt;p&gt;First get out of your environement, update some packages and enable your environment&amp;nbsp;again:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;source&lt;/span&gt; deactivate
+conda update conda
+conda update anaconda
+conda install nomkl numpy scipy scikit-learn numexpr
+conda update mkl
+&lt;span class="nb"&gt;source&lt;/span&gt; activate deep-learning
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now, let&amp;#8217;s get that script running, you&amp;#8217;ll like this, I&amp;nbsp;promise.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# get into /tmp to garbage our work afterwards&lt;/span&gt;
+&lt;span class="nb"&gt;cd&lt;/span&gt; /tmp
+mkdir results
+&lt;span class="c1"&gt;# download the style transfer script&lt;/span&gt;
+wget https://raw.githubusercontent.com/fchollet/keras/master/examples/neural_style_transfer.py
+&lt;span class="c1"&gt;# you need these packages to run this particular sample&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now, download a couple of images that you like on the same folder. Call it &lt;code&gt;myimage.jpg&lt;/code&gt; for example. I added this&amp;nbsp;one:&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/gallery/style-transfer/myimage.jpg" width="600px"&gt;&lt;/p&gt;
+&lt;p&gt;Also, download a couple of the &lt;a href="http://www.madisonartshop.com/20-most-famous-paintings-of-all-time.html"&gt;most famous paintings of all time&lt;/a&gt;.
+Call it &lt;code&gt;mystyle.jpg&lt;/code&gt; (or whatever you want, really). I actually got a pic of a painting my wife authored. Bonus point, you know&amp;#8230;&amp;nbsp;;)&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/gallery/style-transfer/mystyle.jpg" width="600px"&gt;&lt;/p&gt;
+&lt;p&gt;Now, the magic&amp;nbsp;command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;python neural_style_transfer.py myimage.jpg mystyle.jpg results/myresult
+ls -l results/
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;There you should see all the intermediate images that resulted from it. 100th image looks
+ok, though I would probably leave it for a little longer to get a better&amp;nbsp;result.&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/gallery/style-transfer/myresult_at_iteration_99.png" width="600px"&gt;&lt;/p&gt;
+&lt;p&gt;You can also create a&amp;nbsp;gif:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;convert -delay &lt;span class="m"&gt;10&lt;/span&gt; -loop &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="sb"&gt;`&lt;/span&gt;ls -v *.png&lt;span class="sb"&gt;`&lt;/span&gt; animated.gif
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img src="/images/gallery/style-transfer/animated.gif" width="600px"&gt;&lt;/p&gt;
+&lt;p&gt;For a point of comparison, you can see here the result &lt;a href="http://www.deepart.io/"&gt;Deepart.io&lt;/a&gt;&amp;nbsp;return:&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/gallery/style-transfer/deepart-io.jpg" width="600px"&gt;&lt;/p&gt;
+&lt;p&gt;I like theirs better, but ours is not that bad!! You just have to play with the settings for a little&amp;nbsp;longer.&lt;/p&gt;
+&lt;p&gt;Here is a sample of how the same picture looks with another&amp;nbsp;style:&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/gallery/style-transfer/second-style.jpg" width="600px"&gt;&lt;/p&gt;
+&lt;p&gt;Not bad, right? You can see the chunks of the oil painting transferred into this photo. This is pretty&amp;nbsp;amazing.&lt;/p&gt;
+&lt;p&gt;Alright,&amp;nbsp;enjoy!&lt;/p&gt;</summary></entry><entry><title>Minimalist Deep [Reinforcement] Learning Software</title><link href="http://www.mimoralea.com/minimalist-deep-reinforcement-learning-software.html" rel="alternate"></link><published>2016-12-10T09:33:00-06:00</published><updated>2016-12-10T09:33:00-06:00</updated><author><name>Miguel Morales</name></author><id>tag:www.mimoralea.com,2016-12-10:minimalist-deep-reinforcement-learning-software.html</id><summary type="html">&lt;h2&gt;Intro&lt;/h2&gt;
+&lt;p&gt;On this post, I&amp;#8217;ll be showing you how to install Arch Linux with i3 windows manager.
+Yep, that&amp;#8217;s it, not &lt;span class="caps"&gt;DE&lt;/span&gt;, minimalist,&amp;nbsp;remember?&lt;/p&gt;
+&lt;p&gt;Quick note is, the screenshots and disk sizes might not be consistent, this is &lt;span class="caps"&gt;OK&lt;/span&gt;, the thing is,
+I took the screenshots when I was building the system with a specific configuration, and then
+I rebuilt it shortly after with a little larger&amp;nbsp;drives.&lt;/p&gt;
+&lt;p&gt;If you have any questions, feel free to&amp;nbsp;ask!&lt;/p&gt;
+&lt;p&gt;We will be building the system on a 2 &lt;span class="caps"&gt;RAID&lt;/span&gt;&amp;nbsp;configuration:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class="caps"&gt;RAID&lt;/span&gt; 10 (mirror+striping): 4 x 500 &lt;span class="caps"&gt;GB&lt;/span&gt; &lt;span class="caps"&gt;SSD&lt;/span&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;span class="caps"&gt;RAID&lt;/span&gt; 0 (striping): 2 x 1 &lt;span class="caps"&gt;TB&lt;/span&gt; &lt;span class="caps"&gt;HD&lt;/span&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The first &lt;span class="caps"&gt;RAID&lt;/span&gt; will host the &lt;span class="caps"&gt;OS&lt;/span&gt;, which will be Arch Linux. We will let the
+motherboard software handle the RAIDs so that we can rely on it for drives
+failure. I&amp;#8217;ve found a lot of conflicts when trying to use Linux software &lt;span class="caps"&gt;RAID&lt;/span&gt;
+like &lt;code&gt;mdadm&lt;/code&gt; to create a &lt;span class="caps"&gt;RAID&lt;/span&gt; of the whole disk and a (redundant) boot partition
+off it, but doing this with the Intel controller works well for me. The system
+will be able to boot even is a disk fails and will also take advantage of the
+multi disk config by speeding up 4x the reads and 2x the&amp;nbsp;writes.&lt;/p&gt;
+&lt;p&gt;The second &lt;span class="caps"&gt;RAID&lt;/span&gt; is where we will put the deep learning data, so since we do
+not care about keeping this data redundant (as this is online accessible data),
+we are going to setup a striping array on this set of disks. Basically, we will
+use the full 2 &lt;span class="caps"&gt;TB&lt;/span&gt; of space available, and also gain a 2x speed up in both
+reads and writes. Not too&amp;nbsp;shabby!&lt;/p&gt;
+&lt;h2&gt;Set up the disk as software &lt;span class="caps"&gt;RAID&lt;/span&gt; from your&amp;nbsp;motherboard&lt;/h2&gt;
+&lt;p&gt;This is a somewhat important step. Remember, we are building the array on
+the motherboard software, before the &lt;span class="caps"&gt;OS&lt;/span&gt;. This is how the &lt;span class="caps"&gt;BIOS&lt;/span&gt; would look like
+after setting up the 2&amp;nbsp;arrays:&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/gallery/silencio/bios-drives.jpg" width="600px"&gt;&lt;/p&gt;
+&lt;p&gt;Now, remember that this is a screenshot of my old setup. However, if you
+follow the prompts on your system, it should be pretty straight-forward
+to get through this&amp;nbsp;part.&lt;/p&gt;
+&lt;h2&gt;Create your&amp;nbsp;partitions&lt;/h2&gt;
+&lt;p&gt;&lt;span class="caps"&gt;OK&lt;/span&gt;, so I&amp;#8217;m assuming you created your Arch Linux boot pen drive and booted on&amp;nbsp;it.&lt;/p&gt;
+&lt;p&gt;Now, you can take a look at the disks detected by your system&amp;nbsp;with:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;fdisk --list
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Make note of the &lt;span class="caps"&gt;RAID&lt;/span&gt; partitions that will show up. In my case &amp;#8220;md124&amp;#8221; was the &lt;span class="caps"&gt;OS&lt;/span&gt;,
+and &amp;#8220;md125&amp;#8221; was the data&amp;nbsp;array.&lt;/p&gt;
+&lt;p&gt;Now, let&amp;#8217;s briefly make sure you have network access and set the correct&amp;nbsp;time:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ping archlinux.org
+timedatectl set-ntp &lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Next, we will create the partitions as&amp;nbsp;follows:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# partition 1 - 100MB EFI -&amp;gt; Hex code ef00&lt;/span&gt;
+&lt;span class="c1"&gt;# partition 2 - 500MB Boot -&amp;gt; Hex code 8300&lt;/span&gt;
+&lt;span class="c1"&gt;# partition 3 - 100% remaining on disk linux -&amp;gt; Hex code 8300&lt;/span&gt;
+gdisk /dev/md124
+&lt;span class="c1"&gt;# partition 1 - 100% disk -&amp;gt; Hex code 8300&lt;/span&gt;
+gdisk /dev/md125
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now, that the partitions are created, we create the &amp;#8220;lvm&amp;#8221; volume groups, and logical&amp;nbsp;volumes:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;vgcreate os /dev/md124p3
+vgcreate data /dev/md125p1
+&lt;span class="c1"&gt;# create the volumes on top of the OS array&lt;/span&gt;
+lvcreate --size 16GB os --name swap
+lvcreate --size 60GB os --name root
+lvcreate -l +100%FREE os --name home
+&lt;span class="c1"&gt;# create the volume where the working data will reside&lt;/span&gt;
+lvcreate -l +100%FREE data --name srv
+&lt;span class="c1"&gt;# visualize partitions and volumes&lt;/span&gt;
+lvdisplay
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Next, we format all of the partitions&amp;nbsp;created:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# EFI and boot partitions&lt;/span&gt;
+mkfs.vfat -F32 /dev/md124p1
+mkfs.ext2 /dev/md124p2
+&lt;span class="c1"&gt;# system partitions&lt;/span&gt;
+mkswap /dev/mapper/os-swap
+mkfs.ext4 /dev/mapper/os-home
+mkfs.ext4 /dev/mapper/os-root
+&lt;span class="c1"&gt;# data partition&lt;/span&gt;
+mkfs.ext4 /dev/mapper/data-srv
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now, we mount the system to start the installation of the &lt;span class="caps"&gt;OS&lt;/span&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# mount root and boot partitions&lt;/span&gt;
+mount /dev/mapper/os-root /mnt
+mkdir /mnt/boot
+mount /dev/md124p2 /mnt/boot
+mkdir /mnt/boot/efi
+mount /dev/md124p1 /mnt/boot/efi
+&lt;span class="c1"&gt;# mount os partitions&lt;/span&gt;
+mkdir /mnt/srv
+mkdir /mnt/home
+mount /dev/mapper/os-home /mnt/home
+mount /dev/mapper/data-srv /mnt/srv
+&lt;span class="c1"&gt;# enable swap partition&lt;/span&gt;
+swapon /dev/mapper/os-swap
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;We now install the base system on the mounted partitions, generate the fstab,
+copy some config files from the &lt;span class="caps"&gt;USB&lt;/span&gt; stick and chroot our new&amp;nbsp;system: &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# this installs some base packages to make our system usable&lt;/span&gt;
+pacstrap /mnt base base-devel grub-efi-x86_64 vim git efibootmgr zsh
+&lt;span class="c1"&gt;# generate the fstab so that our system can find the partitions on boot&lt;/span&gt;
+genfstab -pU /mnt &amp;gt;&amp;gt; /mnt/etc/fstab
+&lt;span class="c1"&gt;# copy the prompt config from the USB stick - I really like the installer&amp;#39;s config&lt;/span&gt;
+rsync -av /root/ /mnt/root/
+rsync -av /etc/zsh/ /mnt/etc/zsh/
+&lt;span class="c1"&gt;# get into the new system&lt;/span&gt;
+arch-chroot /mnt /bin/zsh
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Cool! You are now inside of your new system - treat it&amp;nbsp;nicely.&lt;/p&gt;
+&lt;p&gt;Let&amp;#8217;s do some initial configuration to make the system par to most standard Linux&amp;nbsp;distributions.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ln -s /usr/share/zoneinfo/America/Chicago /etc/localtime
+hwclock --systohc --utc
+&lt;span class="c1"&gt;# my hostname is hash - make this whatever you want yours to be&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="nb"&gt;hash&lt;/span&gt; &amp;gt; /etc/hostname
+hostname &lt;span class="nb"&gt;hash&lt;/span&gt;
+vi /etc/hosts &lt;span class="c1"&gt;# make sure you add your hostname to this too&lt;/span&gt;
+&lt;span class="c1"&gt;# this is the root password... set that now&lt;/span&gt;
+passwd
+&lt;span class="c1"&gt;# add your user, mine is mimoralea with group wheel... make this whatever you&amp;#39;d like&lt;/span&gt;
+useradd -m -g users -G wheel mimoralea
+passwd mimoralea
+&lt;span class="c1"&gt;# set some language variables&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;LANG&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;en_US.UTF-8 &amp;gt;&amp;gt; /etc/locale.conf
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;LANGUAGE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;en_US &amp;gt;&amp;gt; /etc/locale.conf
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;LC_ALL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;C &amp;gt;&amp;gt; /etc/locale.conf
+&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;LANG&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;en_US.UTF-8&amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;en_US.UTF-8 UTF-8&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; /etc/locale.gen 
+locale-gen 
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;LC_COLLATE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;C&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; /etc/locale.conf
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;KEYMAP&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;us&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; /etc/vconsole.conf
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;FONT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;eurlatgr&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; /etc/vconsole.conf
+&lt;span class="c1"&gt;# update pacman&amp;#39;s database and install some new packages&lt;/span&gt;
+pacman -Sy --noconfirm
+pacman -S --noconfirm grub linux-headers os-prober intel-ucode dosfstools efibootmgr
+mdadm --detail --scan &amp;gt;&amp;gt; /etc/mdadm.conf
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Let&amp;#8217;s edit the grub file and change some&amp;nbsp;variables:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;vi /etc/default/grub &lt;span class="c1"&gt;# uncomment GRUB_DISABLE_LINUX_UUID=true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Since we added mdadm arrays (the &lt;span class="caps"&gt;OS&lt;/span&gt; sees the motherboard created arrays as regular mdadm&amp;#8217;s), let&amp;#8217;s
+make a few changes to the mkinitcpio&amp;nbsp;files.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sed -i.bak -r &lt;span class="s1"&gt;&amp;#39;s/^HOOKS=(.*)block(.*)/HOOKS=\1block mdadm_udev lvm2\2/g&amp;#39;&lt;/span&gt; /etc/mkinitcpio.conf 
+&lt;span class="c1"&gt;# BROKEN: sed -i.bak -r &amp;#39;s/^BINARIES=&amp;quot;&amp;quot;/BINARIES=&amp;quot;/sbin/mdmon&amp;quot;/g&amp;#39; /etc/mkinitcpio.conf&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The last command marked as &lt;span class="caps"&gt;BROKEN&lt;/span&gt; is broken, surprise! If you know how to write that sed
+line please let me know in a comment below&amp;nbsp;:)&lt;/p&gt;
+&lt;p&gt;But in any case, make sure you change the line &lt;code&gt;BINARIES=""&lt;/code&gt; for &lt;code&gt;BINARIES="/sbin/mdmon"&lt;/code&gt;. Do it manually or let me&amp;nbsp;know!&lt;/p&gt;
+&lt;p&gt;After you make those 2 changes, execute the following commands to get grub&amp;nbsp;installed:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mkinitcpio -p linux
+grub-install --target&lt;span class="o"&gt;=&lt;/span&gt;x86_64-efi --efi-directory&lt;span class="o"&gt;=&lt;/span&gt;/boot/efi --bootloader-id&lt;span class="o"&gt;=&lt;/span&gt;arch_grub --recheck --debug /dev/md/os_0
+grub-mkconfig -o /boot/grub/grub.cfg
+&lt;span class="c1"&gt;# these two lines are a trick for some systems that look for the EFI files on a different directory.&lt;/span&gt;
+&lt;span class="c1"&gt;# we might not need them, but it does hurt to have them&lt;/span&gt;
+mkdir /boot/efi/EFI/boot
+cp /boot/efi/EFI/arch_grub/grubx64.efi /boot/efi/EFI/boot/bootx64.efi
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;We can now get off this new system umount, disable the swap partition and&amp;nbsp;reboot:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;exit&lt;/span&gt;
+&lt;span class="c1"&gt;# we are now back on the installer&lt;/span&gt;
+umount -R /mnt
+swapoff -a
+reboot
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Remove the pen drive and go get a cup of coffee. I&amp;#8217;ll see you in few&amp;nbsp;minutes&amp;#8230;&lt;/p&gt;
+&lt;p&gt;Alright, let&amp;#8217;s login and immediatelly give your user sudo&amp;nbsp;access:&lt;/p&gt;
+&lt;p&gt;:::Bash
+   # login as root
+   su
+   # and uncomment the line that would allow wheel users to sudo&amp;nbsp;visudo&lt;/p&gt;
+&lt;p&gt;Now, let&amp;#8217;s setup your network&amp;nbsp;connectivity:&lt;/p&gt;
+&lt;p&gt;:::Bash
+   # still as root let&amp;#8217;s setup the network connection
+   ip addr &lt;br /&gt;
+   # my device is &amp;#8216;enp0s31f6&amp;#8217;
+   cp /etc/netctl/examples/ethernet-dhcp /etc/netctl/enp0s31f6
+   # not sure if we need this one (don&amp;#8217;t remember)
+   # but -rf would fail silently
+   rm -rf /etc/netctl/eth0 
+   # now edit this file to make your device look as needed
+   vi /etc/netctl/enp0s31f6 
+   # let&amp;#8217;s get online!
+   netctl list
+   netctl start enp0s31f6
+   netctl enable&amp;nbsp;enp0s31f6&lt;/p&gt;
+&lt;p&gt;We want to be able to use yaourt to download our packages. We trust the community! Let&amp;#8217;s do&amp;nbsp;so:&lt;/p&gt;
+&lt;p&gt;:::Bash
+   echo &amp;#8221; &amp;gt;&amp;gt; /etc/pacman.conf 
+   echo &amp;#8216;[archlinuxfr]&amp;#8217; &amp;gt;&amp;gt; /etc/pacman.conf 
+   echo &amp;#8216;SigLevel = Never&amp;#8217; &amp;gt;&amp;gt; /etc/pacman.conf 
+   echo &amp;#8216;Server = http://repo.archlinux.fr/$arch&amp;#8217; &amp;gt;&amp;gt; /etc/pacman.conf 
+   pacman -Sy&amp;nbsp;yaourt&lt;/p&gt;
+&lt;p&gt;Let&amp;#8217;s get out of sudo, and install some more&amp;nbsp;packages:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# get out of su&lt;/span&gt;
+&lt;span class="nb"&gt;exit&lt;/span&gt;
+yaourt -S nvidia nvidia-utils cuda i3 i3-wm i3status i3lock &lt;span class="se"&gt;\&lt;/span&gt;
+    xterm dmenu xorg xorg-xinit termite chromium emacs franz-bin &lt;span class="se"&gt;\&lt;/span&gt;
+i3blocks rsync wget curl nitrogen vlc terminus-font
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now, I&amp;#8217;m not going into the details how I personally setup my i3, but I give you a couple of&amp;nbsp;tips:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# this command executes i3 once the xinitr is started&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;exec i3 -V &amp;gt;&amp;gt; ~/.config/i3/i3log 2&amp;gt;&amp;amp;1&amp;#39;&lt;/span&gt; &amp;gt;&amp;gt; ~/.xinitr
+&lt;span class="c1"&gt;# this one adds a X session when a bash session is added&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;[ -z &amp;quot;$DISPLAY&amp;quot; -a &amp;quot;$(fgconsole)&amp;quot; -eq 1 ] &amp;amp;&amp;amp; exec startx&amp;#39;&lt;/span&gt; &amp;gt;&amp;gt; ~/.bash_profile
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Also, if you have never used i3 you&amp;#8217;ll freak out when you see the default fonts!!
+&lt;span class="caps"&gt;OMG&lt;/span&gt;! Worry-not, you can fix this&amp;nbsp;with:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yaourt -S adobe-source-code-pro-fonts  adobe-source-sans-pro-fonts &lt;span class="se"&gt;\&lt;/span&gt;
+    adobe-source-serif-pro-fonts ttf-bitstream-vera ttf-inconsolata &lt;span class="se"&gt;\&lt;/span&gt;
+ttf-ubuntu-font-family ttf-dejavu ttf-freefont ttf-linux-libertine &lt;span class="se"&gt;\&lt;/span&gt;
+ttf-liberation otf-ipafont ttf-amiri ttf-ancient-fonts ttf-ms-fonts &lt;span class="se"&gt;\&lt;/span&gt;
+ttf-monaco ttf-noto ttf-vista-fonts
+yaourt -Rdd freetype2 fontconfig
+yaourt -S fontconfig-infinality freetype2-infinality
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;You might want to edit &amp;#8220;/etc/pacman.conf&amp;#8221; and add the following repositories (append the lines at the&amp;nbsp;end):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[infinality-bundle]&lt;/span&gt;
+&lt;span class="na"&gt;Server&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;http://bohoomil.com/repo/$arch&lt;/span&gt;
+
+&lt;span class="k"&gt;[infinality-bundle-multilib]&lt;/span&gt;
+&lt;span class="na"&gt;Server&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;http://bohoomil.com/repo/multilib/$arch&lt;/span&gt;
+
+&lt;span class="k"&gt;[infinality-bundle-fonts]&lt;/span&gt;
+&lt;span class="na"&gt;Server&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;http://bohoomil.com/repo/fonts&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now, add the keys&amp;nbsp;with:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo pacman-key -r 962DDE58
+sudo pacman-key --lsign-key 962DDE58
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Install infinality bundle to improve&amp;nbsp;rendering:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yaourt -Rdd cairo
+yaourt -Syy infinality-bundle
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Finally, I like to use pulseaudio and pavucontrol, I guess using Fedora for a while open my heart to it&amp;nbsp;:)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yaourt -S pavucontrol pulseaudio pulseaudio-bluetooth
+pulseaudio --start
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Wow! You should like your setup. I do, I love mine. Make sure you share your&amp;nbsp;screenshot:&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/gallery/silencio/i3.png" width="1200px"&gt;&lt;/p&gt;
+&lt;p&gt;Enjoy!&lt;/p&gt;</summary></entry><entry><title>Minimalist Deep [Reinforcement] Learning Hardware</title><link href="http://www.mimoralea.com/minimalist-deep-reinforcement-learning-hardware.html" rel="alternate"></link><published>2016-09-29T16:59:00-05:00</published><updated>2016-09-29T16:59:00-05:00</updated><author><name>Miguel Morales</name></author><id>tag:www.mimoralea.com,2016-09-29:minimalist-deep-reinforcement-learning-hardware.html</id><summary type="html">&lt;p&gt;&lt;strong&gt;&lt;span class="caps"&gt;UPDATE&lt;/span&gt;:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Dec, 20th 2016:&lt;/strong&gt; I guess you can call me crazy. I ended up buying a couple of additional
+parts and replacing the previously installed. Wanna know&amp;nbsp;what?&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/gallery/silencio/titan-box.jpg" width="600px"&gt;
+&lt;img src="/images/gallery/silencio/titan-working.jpg" width="600px"&gt;&lt;/p&gt;
+&lt;p&gt;And, I also got a couple of&amp;nbsp;these:&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/gallery/silencio/500ssd.jpg" width="600px"&gt;&lt;/p&gt;
+&lt;p&gt;And 2 x 1 &lt;span class="caps"&gt;TB&lt;/span&gt; Barracuda Hard&amp;nbsp;Drives.&lt;/p&gt;
+&lt;p&gt;Oh, and by the way, I bought a second Titan X. Merry&amp;nbsp;Christmas!&lt;/p&gt;
+&lt;p&gt;So, now the machine&amp;nbsp;has:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;4 x &lt;span class="caps"&gt;500GB&lt;/span&gt; &lt;span class="caps"&gt;SSD&lt;/span&gt; (instead of 4 x &lt;span class="caps"&gt;120GB&lt;/span&gt; &lt;span class="caps"&gt;SSD&lt;/span&gt;)&lt;/li&gt;
+&lt;li&gt;2 x &lt;span class="caps"&gt;1TB&lt;/span&gt; &lt;span class="caps"&gt;HD&lt;/span&gt; (instead of 2 x &lt;span class="caps"&gt;500GB&lt;/span&gt; &lt;span class="caps"&gt;SSD&lt;/span&gt;)&lt;/li&gt;
+&lt;li&gt;2 x Titan&amp;nbsp;X&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I quickly came to the problem of storage with the previous setup. I started processing video for the
+self-driving car Nanodegree, and only downloading the data got me close to the&amp;nbsp;limit.&lt;/p&gt;
+&lt;p&gt;Regarding the GPUs, I made the change from the 2 x 980&amp;#8217;s to the Titan X (Pascal) after reading
+and comparing performances. Selling the 2 x 980&amp;#8217;s cover almost 3/4 of the cost of the Titan X, and
+performance boost was big. Tasks that would normally take me few days of training, can be now
+measured in hours. In fact, a &lt;a href="https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/5_MultiGPU/multigpu_basics.py"&gt;script&lt;/a&gt;
+that I ran to measure the boost of the dual &lt;span class="caps"&gt;GPU&lt;/span&gt; on the previous setup was ~11 to ~8 seconds
+from single to dual &lt;span class="caps"&gt;GPU&lt;/span&gt; respectively. With the Titan X, it took ~5 seconds with a single &lt;span class="caps"&gt;GPU&lt;/span&gt;.
+Since I&amp;#8217;m experimenting with Deep Learning heavily, I decided to go for the second Titan X as
+an investment. With the 2 x Titan X setup, I now get ~2 seconds for the same&amp;nbsp;test.&lt;/p&gt;
+&lt;p&gt;Anyhow, I thought to share in case someone can benefit from my&amp;nbsp;experimentations.&lt;/p&gt;
+&lt;p&gt;I&amp;#8217;ll be posting about my software stack setup a bit later, make sure to check that out as&amp;nbsp;well.&lt;/p&gt;
+&lt;h2&gt;Intro&lt;/h2&gt;
 &lt;p&gt;So after having some fun building &lt;a href="https://github.com/mimoralea/king-pong"&gt;King-Pong&lt;/a&gt;, 
 and having to actually wait for that fun while training its &lt;span class="caps"&gt;NN&lt;/span&gt;, I decided to step it up
 a bit and build a system that is overall efficient. I like concise solutions; that is 

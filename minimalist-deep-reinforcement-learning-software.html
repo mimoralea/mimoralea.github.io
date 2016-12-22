@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <link rel="stylesheet" type="text/css" href="./theme/css/style.css">
+    <link href="./theme/css/pygments.css" rel="stylesheet">
+    <!--link rel="stylesheet" type="text/css" href="./theme/css/prism.css"-->
+    <!--script src="./theme/js/prism.js"></script-->
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Miguel Morales">
+    <meta name="description" content="Posts and writings by Miguel Morales">
+
+    <link href="http://www.mimoralea.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="mimoralea.com Atom" />
+
+<meta name="keywords" content="">
+
+    <title>
+      mimoralea.com
+&ndash; Minimalist Deep [Reinforcement] Learning&nbsp;Software    </title>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-65422309-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+  </head>
+
+  <body>
+    <aside>
+      <div id="user_meta">
+	<a href=".">
+	</a>
+	<h2><a href=".">mimoralea.com</a></h2>
+	<h4></h4>
+	<p></p>
+        <a href="./pages/about.html">About</a>
+	<br/>
+        <a href="/pdfs/resume.pdf" target="_blank">Resume</a>
+	<br/>
+        <a href="https://www.linkedin.com/pub/miguel-morales/65/28/136/" target="_blank">LinkedIn</a>
+	<br/>
+        <a href="https://www.github.com/mimoralea" target="_blank">Github</a>
+	<br/>
+        <a href="https://www.twitter.com/mimoralea" target="_blank">Twitter</a>
+	<br/>
+        <a href="https://www.quora.com/profile/Miguel-Morales-32" target="_blank">Quora</a>
+	<br/>
+        <a href="https://stackoverflow.com/users/786279/mimoralea" target="_blank">Stackoverflow</a>
+	<br/>
+        <a href="https://plus.google.com/+MiguelMorales-mimoralea" target="_blank">Google+</a>
+	<br/>
+	<br/>
+      </div>
+    </aside>
+
+    <main>
+      <header>
+	<p>
+	  <a href=".">Index</a> &brvbar;
+	  <a href="./archives.html">Archives</a> &brvbar;
+	  <a href="./categories.html">Categories</a>
+	</p>
+      </header>
+      <div id="main_body">
+<article>
+  <div class="article_title">
+    <h3><a href="./minimalist-deep-reinforcement-learning-software.html">Minimalist Deep [Reinforcement] Learning&nbsp;Software</a></h3>
+  </div>
+  <div class="article_text">
+    <h2>Intro</h2>
+<p>On this post, I&#8217;ll be showing you how to install Arch Linux with i3 windows manager.
+Yep, that&#8217;s it, not <span class="caps">DE</span>, minimalist,&nbsp;remember?</p>
+<p>Quick note is, the screenshots and disk sizes might not be consistent, this is <span class="caps">OK</span>, the thing is,
+I took the screenshots when I was building the system with a specific configuration, and then
+I rebuilt it shortly after with a little larger&nbsp;drives.</p>
+<p>If you have any questions, feel free to&nbsp;ask!</p>
+<p>We will be building the system on a 2 <span class="caps">RAID</span>&nbsp;configuration:</p>
+<ul>
+<li><span class="caps">RAID</span> 10 (mirror+striping): 4 x 500 <span class="caps">GB</span> <span class="caps">SSD</span>.</li>
+<li><span class="caps">RAID</span> 0 (striping): 2 x 1 <span class="caps">TB</span> <span class="caps">HD</span>.</li>
+</ul>
+<p>The first <span class="caps">RAID</span> will host the <span class="caps">OS</span>, which will be Arch Linux. We will let the
+motherboard software handle the RAIDs so that we can rely on it for drives
+failure. I&#8217;ve found a lot of conflicts when trying to use Linux software <span class="caps">RAID</span>
+like <code>mdadm</code> to create a <span class="caps">RAID</span> of the whole disk and a (redundant) boot partition
+off it, but doing this with the Intel controller works well for me. The system
+will be able to boot even is a disk fails and will also take advantage of the
+multi disk config by speeding up 4x the reads and 2x the&nbsp;writes.</p>
+<p>The second <span class="caps">RAID</span> is where we will put the deep learning data, so since we do
+not care about keeping this data redundant (as this is online accessible data),
+we are going to setup a striping array on this set of disks. Basically, we will
+use the full 2 <span class="caps">TB</span> of space available, and also gain a 2x speed up in both
+reads and writes. Not too&nbsp;shabby!</p>
+<h2>Set up the disk as software <span class="caps">RAID</span> from your&nbsp;motherboard</h2>
+<p>This is a somewhat important step. Remember, we are building the array on
+the motherboard software, before the <span class="caps">OS</span>. This is how the <span class="caps">BIOS</span> would look like
+after setting up the 2&nbsp;arrays:</p>
+<p><img src="/images/gallery/silencio/bios-drives.jpg" width="600px"></p>
+<p>Now, remember that this is a screenshot of my old setup. However, if you
+follow the prompts on your system, it should be pretty straight-forward
+to get through this&nbsp;part.</p>
+<h2>Create your&nbsp;partitions</h2>
+<p><span class="caps">OK</span>, so I&#8217;m assuming you created your Arch Linux boot pen drive and booted on&nbsp;it.</p>
+<p>Now, you can take a look at the disks detected by your system&nbsp;with:</p>
+<div class="highlight"><pre><span></span>fdisk --list
+</pre></div>
+
+
+<p>Make note of the <span class="caps">RAID</span> partitions that will show up. In my case &#8220;md124&#8221; was the <span class="caps">OS</span>,
+and &#8220;md125&#8221; was the data&nbsp;array.</p>
+<p>Now, let&#8217;s briefly make sure you have network access and set the correct&nbsp;time:</p>
+<div class="highlight"><pre><span></span>ping archlinux.org
+timedatectl set-ntp <span class="nb">true</span>
+</pre></div>
+
+
+<p>Next, we will create the partitions as&nbsp;follows:</p>
+<div class="highlight"><pre><span></span><span class="c1"># partition 1 - 100MB EFI -&gt; Hex code ef00</span>
+<span class="c1"># partition 2 - 500MB Boot -&gt; Hex code 8300</span>
+<span class="c1"># partition 3 - 100% remaining on disk linux -&gt; Hex code 8300</span>
+gdisk /dev/md124
+<span class="c1"># partition 1 - 100% disk -&gt; Hex code 8300</span>
+gdisk /dev/md125
+</pre></div>
+
+
+<p>Now, that the partitions are created, we create the &#8220;lvm&#8221; volume groups, and logical&nbsp;volumes:</p>
+<div class="highlight"><pre><span></span>vgcreate os /dev/md124p3
+vgcreate data /dev/md125p1
+<span class="c1"># create the volumes on top of the OS array</span>
+lvcreate --size 16GB os --name swap
+lvcreate --size 60GB os --name root
+lvcreate -l +100%FREE os --name home
+<span class="c1"># create the volume where the working data will reside</span>
+lvcreate -l +100%FREE data --name srv
+<span class="c1"># visualize partitions and volumes</span>
+lvdisplay
+</pre></div>
+
+
+<p>Next, we format all of the partitions&nbsp;created:</p>
+<div class="highlight"><pre><span></span><span class="c1"># EFI and boot partitions</span>
+mkfs.vfat -F32 /dev/md124p1
+mkfs.ext2 /dev/md124p2
+<span class="c1"># system partitions</span>
+mkswap /dev/mapper/os-swap
+mkfs.ext4 /dev/mapper/os-home
+mkfs.ext4 /dev/mapper/os-root
+<span class="c1"># data partition</span>
+mkfs.ext4 /dev/mapper/data-srv
+</pre></div>
+
+
+<p>Now, we mount the system to start the installation of the <span class="caps">OS</span>:</p>
+<div class="highlight"><pre><span></span><span class="c1"># mount root and boot partitions</span>
+mount /dev/mapper/os-root /mnt
+mkdir /mnt/boot
+mount /dev/md124p2 /mnt/boot
+mkdir /mnt/boot/efi
+mount /dev/md124p1 /mnt/boot/efi
+<span class="c1"># mount os partitions</span>
+mkdir /mnt/srv
+mkdir /mnt/home
+mount /dev/mapper/os-home /mnt/home
+mount /dev/mapper/data-srv /mnt/srv
+<span class="c1"># enable swap partition</span>
+swapon /dev/mapper/os-swap
+</pre></div>
+
+
+<p>We now install the base system on the mounted partitions, generate the fstab,
+copy some config files from the <span class="caps">USB</span> stick and chroot our new&nbsp;system: </p>
+<div class="highlight"><pre><span></span><span class="c1"># this installs some base packages to make our system usable</span>
+pacstrap /mnt base base-devel grub-efi-x86_64 vim git efibootmgr zsh
+<span class="c1"># generate the fstab so that our system can find the partitions on boot</span>
+genfstab -pU /mnt &gt;&gt; /mnt/etc/fstab
+<span class="c1"># copy the prompt config from the USB stick - I really like the installer&#39;s config</span>
+rsync -av /root/ /mnt/root/
+rsync -av /etc/zsh/ /mnt/etc/zsh/
+<span class="c1"># get into the new system</span>
+arch-chroot /mnt /bin/zsh
+</pre></div>
+
+
+<p>Cool! You are now inside of your new system - treat it&nbsp;nicely.</p>
+<p>Let&#8217;s do some initial configuration to make the system par to most standard Linux&nbsp;distributions.</p>
+<div class="highlight"><pre><span></span>ln -s /usr/share/zoneinfo/America/Chicago /etc/localtime
+hwclock --systohc --utc
+<span class="c1"># my hostname is hash - make this whatever you want yours to be</span>
+<span class="nb">echo</span> <span class="nb">hash</span> &gt; /etc/hostname
+hostname <span class="nb">hash</span>
+vi /etc/hosts <span class="c1"># make sure you add your hostname to this too</span>
+<span class="c1"># this is the root password... set that now</span>
+passwd
+<span class="c1"># add your user, mine is mimoralea with group wheel... make this whatever you&#39;d like</span>
+useradd -m -g users -G wheel mimoralea
+passwd mimoralea
+<span class="c1"># set some language variables</span>
+<span class="nb">echo</span> <span class="nv">LANG</span><span class="o">=</span>en_US.UTF-8 &gt;&gt; /etc/locale.conf
+<span class="nb">echo</span> <span class="nv">LANGUAGE</span><span class="o">=</span>en_US &gt;&gt; /etc/locale.conf
+<span class="nb">echo</span> <span class="nv">LC_ALL</span><span class="o">=</span>C &gt;&gt; /etc/locale.conf
+<span class="nb">export</span> <span class="nv">LANG</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;en_US.UTF-8 UTF-8&quot;</span> &gt;&gt; /etc/locale.gen 
+locale-gen 
+<span class="nb">echo</span> <span class="nv">LC_COLLATE</span><span class="o">=</span><span class="s2">&quot;C&quot;</span> &gt;&gt; /etc/locale.conf
+<span class="nb">echo</span> <span class="nv">KEYMAP</span><span class="o">=</span><span class="s2">&quot;us&quot;</span> &gt;&gt; /etc/vconsole.conf
+<span class="nb">echo</span> <span class="nv">FONT</span><span class="o">=</span><span class="s2">&quot;eurlatgr&quot;</span> &gt;&gt; /etc/vconsole.conf
+<span class="c1"># update pacman&#39;s database and install some new packages</span>
+pacman -Sy --noconfirm
+pacman -S --noconfirm grub linux-headers os-prober intel-ucode dosfstools efibootmgr
+mdadm --detail --scan &gt;&gt; /etc/mdadm.conf
+</pre></div>
+
+
+<p>Let&#8217;s edit the grub file and change some&nbsp;variables:</p>
+<div class="highlight"><pre><span></span>vi /etc/default/grub <span class="c1"># uncomment GRUB_DISABLE_LINUX_UUID=true</span>
+</pre></div>
+
+
+<p>Since we added mdadm arrays (the <span class="caps">OS</span> sees the motherboard created arrays as regular mdadm&#8217;s), let&#8217;s
+make a few changes to the mkinitcpio&nbsp;files.</p>
+<div class="highlight"><pre><span></span>sed -i.bak -r <span class="s1">&#39;s/^HOOKS=(.*)block(.*)/HOOKS=\1block mdadm_udev lvm2\2/g&#39;</span> /etc/mkinitcpio.conf 
+<span class="c1"># BROKEN: sed -i.bak -r &#39;s/^BINARIES=&quot;&quot;/BINARIES=&quot;/sbin/mdmon&quot;/g&#39; /etc/mkinitcpio.conf</span>
+</pre></div>
+
+
+<p>The last command marked as <span class="caps">BROKEN</span> is broken, surprise! If you know how to write that sed
+line please let me know in a comment below&nbsp;:)</p>
+<p>But in any case, make sure you change the line <code>BINARIES=""</code> for <code>BINARIES="/sbin/mdmon"</code>. Do it manually or let me&nbsp;know!</p>
+<p>After you make those 2 changes, execute the following commands to get grub&nbsp;installed:</p>
+<div class="highlight"><pre><span></span>mkinitcpio -p linux
+grub-install --target<span class="o">=</span>x86_64-efi --efi-directory<span class="o">=</span>/boot/efi --bootloader-id<span class="o">=</span>arch_grub --recheck --debug /dev/md/os_0
+grub-mkconfig -o /boot/grub/grub.cfg
+<span class="c1"># these two lines are a trick for some systems that look for the EFI files on a different directory.</span>
+<span class="c1"># we might not need them, but it does hurt to have them</span>
+mkdir /boot/efi/EFI/boot
+cp /boot/efi/EFI/arch_grub/grubx64.efi /boot/efi/EFI/boot/bootx64.efi
+</pre></div>
+
+
+<p>We can now get off this new system umount, disable the swap partition and&nbsp;reboot:</p>
+<div class="highlight"><pre><span></span><span class="nb">exit</span>
+<span class="c1"># we are now back on the installer</span>
+umount -R /mnt
+swapoff -a
+reboot
+</pre></div>
+
+
+<p>Remove the pen drive and go get a cup of coffee. I&#8217;ll see you in few&nbsp;minutes&#8230;</p>
+<p>Alright, let&#8217;s login and immediatelly give your user sudo&nbsp;access:</p>
+<p>:::Bash
+   # login as root
+   su
+   # and uncomment the line that would allow wheel users to sudo&nbsp;visudo</p>
+<p>Now, let&#8217;s setup your network&nbsp;connectivity:</p>
+<p>:::Bash
+   # still as root let&#8217;s setup the network connection
+   ip addr <br />
+   # my device is &#8216;enp0s31f6&#8217;
+   cp /etc/netctl/examples/ethernet-dhcp /etc/netctl/enp0s31f6
+   # not sure if we need this one (don&#8217;t remember)
+   # but -rf would fail silently
+   rm -rf /etc/netctl/eth0 
+   # now edit this file to make your device look as needed
+   vi /etc/netctl/enp0s31f6 
+   # let&#8217;s get online!
+   netctl list
+   netctl start enp0s31f6
+   netctl enable&nbsp;enp0s31f6</p>
+<p>We want to be able to use yaourt to download our packages. We trust the community! Let&#8217;s do&nbsp;so:</p>
+<p>:::Bash
+   echo &#8221; &gt;&gt; /etc/pacman.conf 
+   echo &#8216;[archlinuxfr]&#8217; &gt;&gt; /etc/pacman.conf 
+   echo &#8216;SigLevel = Never&#8217; &gt;&gt; /etc/pacman.conf 
+   echo &#8216;Server = http://repo.archlinux.fr/$arch&#8217; &gt;&gt; /etc/pacman.conf 
+   pacman -Sy&nbsp;yaourt</p>
+<p>Let&#8217;s get out of sudo, and install some more&nbsp;packages:</p>
+<div class="highlight"><pre><span></span><span class="c1"># get out of su</span>
+<span class="nb">exit</span>
+yaourt -S nvidia nvidia-utils cuda i3 i3-wm i3status i3lock <span class="se">\</span>
+    xterm dmenu xorg xorg-xinit termite chromium emacs franz-bin <span class="se">\</span>
+i3blocks rsync wget curl nitrogen vlc terminus-font
+</pre></div>
+
+
+<p>Now, I&#8217;m not going into the details how I personally setup my i3, but I give you a couple of&nbsp;tips:</p>
+<div class="highlight"><pre><span></span><span class="c1"># this command executes i3 once the xinitr is started</span>
+<span class="nb">echo</span> <span class="s1">&#39;exec i3 -V &gt;&gt; ~/.config/i3/i3log 2&gt;&amp;1&#39;</span> &gt;&gt; ~/.xinitr
+<span class="c1"># this one adds a X session when a bash session is added</span>
+<span class="nb">echo</span> <span class="s1">&#39;[ -z &quot;$DISPLAY&quot; -a &quot;$(fgconsole)&quot; -eq 1 ] &amp;&amp; exec startx&#39;</span> &gt;&gt; ~/.bash_profile
+</pre></div>
+
+
+<p>Also, if you have never used i3 you&#8217;ll freak out when you see the default fonts!!
+<span class="caps">OMG</span>! Worry-not, you can fix this&nbsp;with:</p>
+<div class="highlight"><pre><span></span>yaourt -S adobe-source-code-pro-fonts  adobe-source-sans-pro-fonts <span class="se">\</span>
+    adobe-source-serif-pro-fonts ttf-bitstream-vera ttf-inconsolata <span class="se">\</span>
+ttf-ubuntu-font-family ttf-dejavu ttf-freefont ttf-linux-libertine <span class="se">\</span>
+ttf-liberation otf-ipafont ttf-amiri ttf-ancient-fonts ttf-ms-fonts <span class="se">\</span>
+ttf-monaco ttf-noto ttf-vista-fonts
+yaourt -Rdd freetype2 fontconfig
+yaourt -S fontconfig-infinality freetype2-infinality
+</pre></div>
+
+
+<p>You might want to edit &#8220;/etc/pacman.conf&#8221; and add the following repositories (append the lines at the&nbsp;end):</p>
+<div class="highlight"><pre><span></span><span class="k">[infinality-bundle]</span>
+<span class="na">Server</span> <span class="o">=</span> <span class="s">http://bohoomil.com/repo/$arch</span>
+
+<span class="k">[infinality-bundle-multilib]</span>
+<span class="na">Server</span> <span class="o">=</span> <span class="s">http://bohoomil.com/repo/multilib/$arch</span>
+
+<span class="k">[infinality-bundle-fonts]</span>
+<span class="na">Server</span> <span class="o">=</span> <span class="s">http://bohoomil.com/repo/fonts</span>
+</pre></div>
+
+
+<p>Now, add the keys&nbsp;with:</p>
+<div class="highlight"><pre><span></span>sudo pacman-key -r 962DDE58
+sudo pacman-key --lsign-key 962DDE58
+</pre></div>
+
+
+<p>Install infinality bundle to improve&nbsp;rendering:</p>
+<div class="highlight"><pre><span></span>yaourt -Rdd cairo
+yaourt -Syy infinality-bundle
+</pre></div>
+
+
+<p>Finally, I like to use pulseaudio and pavucontrol, I guess using Fedora for a while open my heart to it&nbsp;:)</p>
+<div class="highlight"><pre><span></span>yaourt -S pavucontrol pulseaudio pulseaudio-bluetooth
+pulseaudio --start
+</pre></div>
+
+
+<p>Wow! You should like your setup. I do, I love mine. Make sure you share your&nbsp;screenshot:</p>
+<p><img src="/images/gallery/silencio/i3.png" width="1200px"></p>
+<p>Enjoy!</p>
+  </div>
+  <div class="article_meta">
+    <p>Posted on: Sat 10 December 2016</p>
+    <p>Category: <a href="./category/deep-learning.html">deep-learning</a>
+    </p>
+  </div>
+  <div id="article_comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_identifier = "minimalist-deep-reinforcement-learning-software.html";
+      (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://mimoralea.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+  </div>
+
+</article>
+
+
+      </div>
+
+      <div id="ending_message">
+      <p>By Miguel Morales.</p>
+      </div>
+    </main>
+  </body>
+</html>

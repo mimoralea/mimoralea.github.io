@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <link rel="stylesheet" type="text/css" href="./theme/css/style.css">
+    <link href="./theme/css/pygments.css" rel="stylesheet">
+    <!--link rel="stylesheet" type="text/css" href="./theme/css/prism.css"-->
+    <!--script src="./theme/js/prism.js"></script-->
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Miguel Morales">
+    <meta name="description" content="Posts and writings by Miguel Morales">
+
+    <link href="http://www.mimoralea.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="mimoralea.com Atom" />
+
+<meta name="keywords" content="">
+
+    <title>
+      mimoralea.com
+&ndash; Minimalist Deep [Reinforcement] Learning&nbsp;Hardware    </title>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-65422309-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+  </head>
+
+  <body>
+    <aside>
+      <div id="user_meta">
+	<a href=".">
+	</a>
+	<h2><a href=".">mimoralea.com</a></h2>
+	<h4></h4>
+	<p></p>
+        <a href="./pages/about.html">About</a>
+	<br/>
+        <a href="/pdfs/resume.pdf" target="_blank">Resume</a>
+	<br/>
+        <a href="https://www.linkedin.com/pub/miguel-morales/65/28/136/" target="_blank">LinkedIn</a>
+	<br/>
+        <a href="https://www.github.com/mimoralea" target="_blank">Github</a>
+	<br/>
+        <a href="https://www.twitter.com/mimoralea" target="_blank">Twitter</a>
+	<br/>
+        <a href="https://www.quora.com/profile/Miguel-Morales-32" target="_blank">Quora</a>
+	<br/>
+        <a href="https://stackoverflow.com/users/786279/mimoralea" target="_blank">Stackoverflow</a>
+	<br/>
+        <a href="https://plus.google.com/+MiguelMorales-mimoralea" target="_blank">Google+</a>
+	<br/>
+	<br/>
+      </div>
+    </aside>
+
+    <main>
+      <header>
+	<p>
+	  <a href=".">Index</a> &brvbar;
+	  <a href="./archives.html">Archives</a> &brvbar;
+	  <a href="./categories.html">Categories</a>
+	</p>
+      </header>
+      <div id="main_body">
+<article>
+  <div class="article_title">
+    <h3><a href="./minimalist-deep-reinforcement-learning-hardware.html">Minimalist Deep [Reinforcement] Learning&nbsp;Hardware</a></h3>
+  </div>
+  <div class="article_text">
+    <p><strong><span class="caps">UPDATE</span>:</strong></p>
+<p><strong>Dec, 20th 2016:</strong> I guess you can call me crazy. I ended up buying a couple of additional
+parts and replacing the previously installed. Wanna know&nbsp;what?</p>
+<p><img src="/images/gallery/silencio/titan-box.jpg" width="600px">
+<img src="/images/gallery/silencio/titan-working.jpg" width="600px"></p>
+<p>And, I also got a couple of&nbsp;these:</p>
+<p><img src="/images/gallery/silencio/500ssd.jpg" width="600px"></p>
+<p>And 2 x 1 <span class="caps">TB</span> Barracuda Hard&nbsp;Drives.</p>
+<p>Oh, and by the way, I bought a second Titan X. Merry&nbsp;Christmas!</p>
+<p>So, now the machine&nbsp;has:</p>
+<ul>
+<li>4 x <span class="caps">500GB</span> <span class="caps">SSD</span> (instead of 4 x <span class="caps">120GB</span> <span class="caps">SSD</span>)</li>
+<li>2 x <span class="caps">1TB</span> <span class="caps">HD</span> (instead of 2 x <span class="caps">500GB</span> <span class="caps">SSD</span>)</li>
+<li>2 x Titan&nbsp;X</li>
+</ul>
+<p>I quickly came to the problem of storage with the previous setup. I started processing video for the
+self-driving car Nanodegree, and only downloading the data got me close to the&nbsp;limit.</p>
+<p>Regarding the GPUs, I made the change from the 2 x 980&#8217;s to the Titan X (Pascal) after reading
+and comparing performances. Selling the 2 x 980&#8217;s cover almost 3/4 of the cost of the Titan X, and
+performance boost was big. Tasks that would normally take me few days of training, can be now
+measured in hours. In fact, a <a href="https://github.com/aymericdamien/TensorFlow-Examples/blob/master/examples/5_MultiGPU/multigpu_basics.py">script</a>
+that I ran to measure the boost of the dual <span class="caps">GPU</span> on the previous setup was ~11 to ~8 seconds
+from single to dual <span class="caps">GPU</span> respectively. With the Titan X, it took ~5 seconds with a single <span class="caps">GPU</span>.
+Since I&#8217;m experimenting with Deep Learning heavily, I decided to go for the second Titan X as
+an investment. With the 2 x Titan X setup, I now get ~2 seconds for the same&nbsp;test.</p>
+<p>Anyhow, I thought to share in case someone can benefit from my&nbsp;experimentations.</p>
+<p>I&#8217;ll be posting about my software stack setup a bit later, make sure to check that out as&nbsp;well.</p>
+<h2>Intro</h2>
+<p>So after having some fun building <a href="https://github.com/mimoralea/king-pong">King-Pong</a>, 
+and having to actually wait for that fun while training its <span class="caps">NN</span>, I decided to step it up
+a bit and build a system that is overall efficient. I like concise solutions; that is 
+solutions that solve a problem with a minimum amount of fluff. Not for any reason I
+drive a <a href="https://www.google.com/search?q=scion+iq&amp;espv=2&amp;biw=1278&amp;bih=803&amp;source=lnms&amp;tbm=isch&amp;sa=X&amp;ved=0ahUKEwjNj5XZyrXPAhVMSCYKHQf7Bd4Q_AUIBigB">Scion <span class="caps">IQ</span></a>, 
+or type on a <a href="https://www.google.com/search?q=happy+hacking+keyboard&amp;biw=1278&amp;bih=803&amp;source=lnms&amp;tbm=isch&amp;sa=X&amp;sqi=2&amp;ved=0ahUKEwjJlfj0yrXPAhUC4iYKHf12AfEQ_AUIBygC">Happy Hacking Keyboard</a>, 
+just to mention a&nbsp;few.</p>
+<p>For this reason, <a href="http://pcpartpicker.com/user/mimoralea/saved/#view=N9KZLk">I built a ~$1,500 machine for doing Deep Learning</a>. I selected a
+Mini tower with everything necessary and nothing&nbsp;extra.</p>
+<p>Ready for the breakdown? Here we&nbsp;go:</p>
+<h2>Parts</h2>
+<h3>Motherboard</h3>
+<p>For the motherboard I went with Asus <span class="caps">ROG</span> <span class="caps">MAXIMUS</span> <span class="caps">VIII</span> <span class="caps">GENE</span>. Reason&nbsp;why:</p>
+<ul>
+<li>Cost effective, at about $200 there is very little&nbsp;competetion.</li>
+<li>4 slots for <span class="caps">RAM</span> which is more than&nbsp;enough.</li>
+<li><span class="caps">USB</span> 3.0 and&nbsp;3.1.</li>
+<li><span class="caps">LGA1151</span>, sure it&#8217;s not compatible with 40 lane <span class="caps">CPU</span>&#8217;s, but <a href="https://www.youtube.com/watch?v=rctaLgK5stA">I would argue it&#8217;s not a&nbsp;problem</a></li>
+<li>6 <span class="caps">SATA</span>&nbsp;6Gb/s</li>
+</ul>
+<h3>Processor</h3>
+<p>For the processor I selected an <strong>Intel Core i5 6600K 3.50 GHz</strong>. It is really 
+the best bang for the buck. Also, remember that a faster processor would
+probably not make an impact on your Deep Learning tasks. Higher speed
+are really only necessary if you will be doing video editing or 
+perhaps running multiple virtual machines. But remember, we are keeping
+this build&nbsp;simple.</p>
+<h3>Memory</h3>
+<p>I went with the <strong>Kingston HyperX <span class="caps">FURY</span> Black <span class="caps">32GB</span> Kit</strong>. Sure, that was a little
+greedy, I have to agree there. Maybe we call this build <a href="https://en.wikipedia.org/wiki/Multi-armed_bandit#Semi-uniform_strategies">Epsilon-Greedy</a>?</p>
+<h3><span class="caps">GPU</span></h3>
+<p>For the <span class="caps">GPU</span> I chose to go with 2 x <strong><span class="caps">MSI</span> <span class="caps">GAMING</span> GeForce <span class="caps">GTX</span> 980 <span class="caps">4GB</span> <span class="caps">OC</span></strong>. 
+I bought these second hand in very good&nbsp;condition. </p>
+<p>Now, am I happy with&nbsp;them?</p>
+<p>I can say that I would prefer getting only 1. I check the speed improvements on multi-gpu
+setup and the improvement from 1 to 2 is very minimal. In fact, a recent <a href="https://research.googleblog.com/2016/04/announcing-tensorflow-08-now-with.html">blog post</a>
+by Google Research shows this&nbsp;graph:</p>
+<p><img alt="alt img" src="https://1.bp.blogspot.com/-3e8ukpeMD5g/Vw5r8lIuUQI/AAAAAAAAA-g/UEHdwqD1YKwVrUKDzKpy356yxo_0xJW6ACLcB/s1600/image00.png" /></p>
+<p>For this reason, I would actually recommend getting a better card, E.g. <span class="caps">GTX</span> 1080 instead, 
+you&#8217;ll be paying a little for double the <span class="caps">RAM</span>&nbsp;capacity.</p>
+<h3>Case</h3>
+<p>I got the <strong>Cooler Master Silencio 352</strong> to host all of these components. 
+I&#8217;m very happy with it, it is silent enough. Though, if you are looking for a
+totally silent built, this might not be the best&nbsp;bet.</p>
+<p>Also, I had to remove a couple of things to make everything fit nicely.
+I added some pictures so you guys can save some&nbsp;time.</p>
+<h3><span class="caps">PSU</span></h3>
+<p>For the <span class="caps">PSU</span>, I got one of the highest quality. In terms of capacity, 
+this is sufficient for this build: <strong><span class="caps">EVGA</span> SuperNOVA 850 P2, 80+ <span class="caps">PLATINUM</span> 850W</strong>.</p>
+<h3><span class="caps">CPU</span> <span class="caps">FAN</span></h3>
+<p>Long time I don&#8217;t buy a <span class="caps">CPU</span>, didn&#8217;t know that you had to buy the cooler separatedly!
+Anyhow, the <strong>Corsair Hydro Series H100i v2 Extreme Performance Liquid <span class="caps">CPU</span> Cooler</strong> 
+proved to be&nbsp;excellent.</p>
+<h3>Storage</h3>
+<p>I bought 6 <span class="caps">SSD</span> drives with the intention to put them on a <span class="caps">RAID</span> 10 array. Maybe a lot 
+faster than needed, but I wanted to make sure I gain speed and at the same time
+I have failure tolerance. Now, I&#8217;ll be putting these <span class="caps">RAID</span> 10 on the motherboard so even
+the boot partition should be on top of several drives. I went with <strong>6 x Samsung 840 <span class="caps">EVO</span> <span class="caps">120GB</span></strong>.</p>
+<h3>Others</h3>
+<p>Here are some other things that I got for finishing the&nbsp;build:</p>
+<ul>
+<li><strong><span class="caps">ICY</span> <span class="caps">DOCK</span> <span class="caps">FLEX</span>-<span class="caps">FIT</span> Quattro <span class="caps">MB344SP</span></strong> - The case allows you to put 4 drives. 
+This add-on is basically a <span class="caps">DVD</span>-to-4-ssd. Very easy to&nbsp;install.</li>
+<li><strong><span class="caps">LG</span> <span class="caps">29UM68</span>-P 29-Inch 21:9 UltraWide <span class="caps">IPS</span> Monitor</strong> - Yeah, yeah, 
+a weird ratio, but for using <a href="https://www.archlinux.org/">Arch Linux</a> and <a href="http://i3wm.org/">I3</a> 
+is amazing! And yeah, only 1 monitor. I don&#8217;t believe in &#8220;multi-tasking&#8221;. 
+I believe in&nbsp;focus.</li>
+<li><strong>AmazonBasics Single Monitor Display Mounting Arm</strong> - Honestly, the best monitor arm I ever&nbsp;owned.</li>
+</ul>
+<h1>Build</h1>
+<p>Got most of the parts at the same time. To be fair, I already had 
+some of the drives and one of the GPUs. Here is a pic of the first&nbsp;delivery:</p>
+<p><img src="/images/gallery/silencio/parts.jpg" width="600px"></p>
+<p>Later that week I got the other used <span class="caps">GPU</span>. Obviously, I didn&#8217;t want to 
+try anything different so I went with the exact model I already&nbsp;had:</p>
+<p><img src="/images/gallery/silencio/gpus.jpg" width="600px"></p>
+<p>Here, I started building the system. First open up the mother&nbsp;board:</p>
+<p><img src="/images/gallery/silencio/mb.jpg" width="600px"></p>
+<p>Put the memory&nbsp;in:</p>
+<p><img src="/images/gallery/silencio/cpu.jpg" width="600px"></p>
+<p>Now, I started to mess with the case. Here I inserted the <span class="caps">CPU</span> 
+Cooler, this was rather challenging to fit. One manual recommended
+to attach the fan on the outside, the other on the inside. I went
+with the outside first, but then the front cover would not close.
+At the end, I put the fans on the inside. Here is a pic of the&nbsp;cooler:</p>
+<p><img src="/images/gallery/silencio/cpu-cooler.jpg" width="600px"></p>
+<p>What, you tired already?? We just getting&nbsp;started!</p>
+<p><img src="/images/gallery/silencio/tired-puppy-started.jpg" width="600px"></p>
+<p>Here I inserted the <span class="caps">MB</span> into the case. Tight&nbsp;fit!</p>
+<p><img src="/images/gallery/silencio/ram.jpg" width="600px"></p>
+<p>Place the GPUs&nbsp;inside:</p>
+<p><img src="/images/gallery/silencio/motherboard-closeup.jpg" width="600px"></p>
+<p>Yeah, she is&nbsp;done:</p>
+<p><img src="/images/gallery/silencio/tired-puppy.jpg" width="600px"></p>
+<p>Later, I got the accessory for the extra drives. I really liked this&nbsp;one:</p>
+<p><img src="/images/gallery/silencio/drives.jpg" width="500px"></p>
+<p>I got 4 drives here and 2 inside. Helps with the clutter. After all, who in the world uses <span class="caps">DVD</span> drives anymore?!&nbsp;:)</p>
+<p><img src="/images/gallery/silencio/drives-inserted.jpg" width="500px"></p>
+<p>Look at it. There you can see the <span class="caps">PSU</span>&nbsp;too.</p>
+<p><img src="/images/gallery/silencio/opening-all.jpg" width="600px"></p>
+<p>It was a nice&nbsp;build.</p>
+<p><img src="/images/gallery/silencio/psu-gpus-etc.jpg" width="600px"></p>
+<p>Oh yeah, the case&#8230; This is how the final product looks&nbsp;like:</p>
+<p><img src="/images/gallery/silencio/hash.jpg" width="600px"></p>
+<h1>References</h1>
+<ul>
+<li><a href="http://timdettmers.com/2014/08/14/which-gpu-for-deep-learning/">Tim Dettmers - Which <span class="caps">GPU</span>(s) to Get&nbsp;&#8230;</a></li>
+<li><a href="http://timdettmers.com/2015/03/09/deep-learning-hardware-guide/">Tim Dettmers - A Full Hardware Guide&nbsp;&#8230;</a></li>
+<li><a href="http://timdettmers.com/2014/09/21/how-to-build-and-use-a-multi-gpu-system-for-deep-learning/">Tim Dettmers - How To Build and Use a Multi <span class="caps">GPU</span>&nbsp;&#8230;</a></li>
+<li><a href="http://graphific.github.io/posts/building-a-deep-learning-dream-machine/">Roelof Pieters - Building a Deep Learning&nbsp;&#8230;</a></li>
+<li><a href="http://www.kdnuggets.com/2016/06/build-deep-learning-box.html">Hui Han Chin - How to Build Your Own Deep&nbsp;&#8230;</a></li>
+<li><a href="https://www.youtube.com/user/LinusTechTips">LinusTechTips - Several Videos, highly&nbsp;recommended.</a></li>
+</ul>
+<h1>Conclusion</h1>
+<p>It was a fun build, I&#8217;m typing on it now. Tensorflow works well. The extra <span class="caps">GPU</span> is 
+really not that good I get an improvement of about 20 seconds on a 8 minute task. 
+I wouldn&#8217;t get the second <span class="caps">GPU</span>.</p>
+<p>Join me next time I&#8217;ll be installing a minimalist <span class="caps">OS</span>, Arch Linux with 
+I3, Emacs, Vim, Tensorflow and so on. Remember, only the&nbsp;necessary.</p>
+<p>See you next&nbsp;time!</p>
+  </div>
+  <div class="article_meta">
+    <p>Posted on: Thu 29 September 2016</p>
+    <p>Category: <a href="./category/deep-learning.html">deep-learning</a>
+    </p>
+  </div>
+  <div id="article_comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_identifier = "minimalist-deep-reinforcement-learning-hardware.html";
+      (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://mimoralea.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+  </div>
+
+</article>
+
+
+      </div>
+
+      <div id="ending_message">
+      <p>By Miguel Morales.</p>
+      </div>
+    </main>
+  </body>
+</html>

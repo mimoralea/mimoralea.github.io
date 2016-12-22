@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <link rel="stylesheet" type="text/css" href="./theme/css/style.css">
+    <link href="./theme/css/pygments.css" rel="stylesheet">
+    <!--link rel="stylesheet" type="text/css" href="./theme/css/prism.css"-->
+    <!--script src="./theme/js/prism.js"></script-->
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Miguel Morales">
+    <meta name="description" content="Posts and writings by Miguel Morales">
+
+    <link href="http://www.mimoralea.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="mimoralea.com Atom" />
+
+<meta name="keywords" content="">
+
+    <title>
+      mimoralea.com
+&ndash; Getting Started With <span class="caps">NVIDIA</span> <span class="caps">GPU</span>, Anaconda, TensorFlow and Keras on Arch&nbsp;Linux    </title>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-65422309-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+  </head>
+
+  <body>
+    <aside>
+      <div id="user_meta">
+	<a href=".">
+	</a>
+	<h2><a href=".">mimoralea.com</a></h2>
+	<h4></h4>
+	<p></p>
+        <a href="./pages/about.html">About</a>
+	<br/>
+        <a href="/pdfs/resume.pdf" target="_blank">Resume</a>
+	<br/>
+        <a href="https://www.linkedin.com/pub/miguel-morales/65/28/136/" target="_blank">LinkedIn</a>
+	<br/>
+        <a href="https://www.github.com/mimoralea" target="_blank">Github</a>
+	<br/>
+        <a href="https://www.twitter.com/mimoralea" target="_blank">Twitter</a>
+	<br/>
+        <a href="https://www.quora.com/profile/Miguel-Morales-32" target="_blank">Quora</a>
+	<br/>
+        <a href="https://stackoverflow.com/users/786279/mimoralea" target="_blank">Stackoverflow</a>
+	<br/>
+        <a href="https://plus.google.com/+MiguelMorales-mimoralea" target="_blank">Google+</a>
+	<br/>
+	<br/>
+      </div>
+    </aside>
+
+    <main>
+      <header>
+	<p>
+	  <a href=".">Index</a> &brvbar;
+	  <a href="./archives.html">Archives</a> &brvbar;
+	  <a href="./categories.html">Categories</a>
+	</p>
+      </header>
+      <div id="main_body">
+<article>
+  <div class="article_title">
+    <h3><a href="./getting-started-with-nvidia-gpu-anaconda-tensorflow-and-keras-on-arch-linux.html">Getting Started With <span class="caps">NVIDIA</span> <span class="caps">GPU</span>, Anaconda, TensorFlow and Keras on Arch&nbsp;Linux</a></h3>
+  </div>
+  <div class="article_text">
+    <h2>Intro</h2>
+<p>This is actually a pretty simple setup. First, we will install <span class="caps">NVIDIA</span> drivers and <span class="caps">CUDA</span>,
+then we will install Anaconda, Tensorflow binaries for GPUs, and&nbsp;Keras.</p>
+<h3>Install <span class="caps">NVIDIA</span>&nbsp;drivers</h3>
+<p>Let&#8217;s first install the drivers and&nbsp;cuda:</p>
+<div class="highlight"><pre><span></span>yaourt -S nvidia nvidia-utils cuda
+</pre></div>
+
+
+<p>Now, you need to go to <span class="caps">NVIDIA</span>&#8217;s website and download the
+<a href="https://developer.nvidia.com/cudnn">cuDNN tarball</a>. Just place the file on your &#8220;Downloads&#8221;&nbsp;folder.</p>
+<p>Next, we install the package&nbsp;with:</p>
+<div class="highlight"><pre><span></span>yaourt -S cudnn
+</pre></div>
+
+
+<p>This should install all <span class="caps">NVIDIA</span> dependencies. Let&#8217;s go now and install&nbsp;Anaconda.</p>
+<div class="highlight"><pre><span></span>yaourt -S anaconda
+<span class="c1"># add a pointer to anaconda&#39;s binaries to your path and load it on your open session</span>
+<span class="nb">echo</span> <span class="s2">&quot;export PATH=&quot;</span>/opt/anaconda/bin:<span class="nv">$PATH</span><span class="s2">&quot;&quot;</span>  ~/.bash_profile
+<span class="nb">source</span> ~/.bash_profile
+</pre></div>
+
+
+<p>At this point you can check your installation with <code>anaconda --version &amp;&amp; conda --version</code>.</p>
+<p>Let&#8217;s create an environment and install TensorFlow and&nbsp;Keras:</p>
+<div class="highlight"><pre><span></span>conda create -n deep-learning
+<span class="nb">source</span> activate deep-learning
+<span class="c1"># at the time of writing this is the lastest binary for GPUs</span>
+<span class="c1"># go to https://www.tensorflow.org/get_started/os_setup</span>
+<span class="c1"># and grab the equivalent &quot;linux, gpu, python 3.5&quot;</span>
+<span class="nb">export</span> <span class="nv">TF_BINARY_URL</span><span class="o">=</span>https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-0.12.0-cp35-cp35m-linux_x86_64.whl
+pip3 install --upgrade <span class="nv">$TF_BINARY_URL</span>
+pip3 install ipython
+</pre></div>
+
+
+<p>Now, you should be able to enter on an interactive Python session and load TensorFlow.
+Your output should look as&nbsp;below:</p>
+<div class="highlight"><pre><span></span><span class="o">(</span>deep-learning<span class="o">)</span> <span class="o">[</span>mimoralea@hash ~<span class="o">]</span>$ ipython
+Python 3.5.2 <span class="p">|</span>Anaconda custom <span class="o">(</span>64-bit<span class="o">)</span><span class="p">|</span> <span class="o">(</span>default, Jul  <span class="m">2</span> 2016, 17:53:06<span class="o">)</span> 
+Type <span class="s2">&quot;copyright&quot;</span>, <span class="s2">&quot;credits&quot;</span> or <span class="s2">&quot;license&quot;</span> <span class="k">for</span> more information.
+
+IPython 5.1.0 -- An enhanced Interactive Python.
+?         -&gt; Introduction and overview of IPython<span class="s1">&#39;s features.</span>
+<span class="s1">%quickref -&gt; Quick reference.</span>
+<span class="s1">help      -&gt; Python&#39;</span>s own <span class="nb">help</span> system.
+object?   -&gt; Details about <span class="s1">&#39;object&#39;</span>, use <span class="s1">&#39;object??&#39;</span> <span class="k">for</span> extra details.
+
+In <span class="o">[</span>1<span class="o">]</span>: import tensorflow
+I tensorflow/stream_executor/dso_loader.cc:128<span class="o">]</span> successfully opened CUDA library libcublas.so locally
+I tensorflow/stream_executor/dso_loader.cc:128<span class="o">]</span> successfully opened CUDA library libcudnn.so locally
+I tensorflow/stream_executor/dso_loader.cc:128<span class="o">]</span> successfully opened CUDA library libcufft.so locally
+I tensorflow/stream_executor/dso_loader.cc:128<span class="o">]</span> successfully opened CUDA library libcuda.so.1 locally
+I tensorflow/stream_executor/dso_loader.cc:128<span class="o">]</span> successfully opened CUDA library libcurand.so locally
+</pre></div>
+
+
+<p>Great, now install Keras, configure it and test&nbsp;it.</p>
+<div class="highlight"><pre><span></span>pip3 install keras
+mkdir ~/.keras
+vi ~/.keras/keras.json
+</pre></div>
+
+
+<p>Add the keras config with these&nbsp;values:</p>
+<div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;image_dim_ordering&quot;</span><span class="p">:</span> <span class="s2">&quot;tf&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;epsilon&quot;</span><span class="p">:</span> <span class="mf">1e-07</span><span class="p">,</span>
+<span class="nt">&quot;backend&quot;</span><span class="p">:</span> <span class="s2">&quot;tensorflow&quot;</span><span class="p">,</span>
+<span class="nt">&quot;floatx&quot;</span><span class="p">:</span> <span class="s2">&quot;float32&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Finally, test the end to end&nbsp;installation:</p>
+<div class="highlight"><pre><span></span><span class="o">(</span>deep-learning<span class="o">)</span> <span class="o">[</span>mimoralea@hash ~<span class="o">]</span>$ ipython
+Python 3.5.2 <span class="p">|</span>Anaconda custom <span class="o">(</span>64-bit<span class="o">)</span><span class="p">|</span> <span class="o">(</span>default, Jul  <span class="m">2</span> 2016, 17:53:06<span class="o">)</span> 
+Type <span class="s2">&quot;copyright&quot;</span>, <span class="s2">&quot;credits&quot;</span> or <span class="s2">&quot;license&quot;</span> <span class="k">for</span> more information.
+
+IPython 5.1.0 -- An enhanced Interactive Python.
+?         -&gt; Introduction and overview of IPython<span class="s1">&#39;s features.</span>
+<span class="s1">%quickref -&gt; Quick reference.</span>
+<span class="s1">help      -&gt; Python&#39;</span>s own <span class="nb">help</span> system.
+object?   -&gt; Details about <span class="s1">&#39;object&#39;</span>, use <span class="s1">&#39;object??&#39;</span> <span class="k">for</span> extra details.
+
+In <span class="o">[</span>1<span class="o">]</span>: import keras
+Using TensorFlow backend.
+I tensorflow/stream_executor/dso_loader.cc:128<span class="o">]</span> successfully opened CUDA library libcublas.so locally
+I tensorflow/stream_executor/dso_loader.cc:128<span class="o">]</span> successfully opened CUDA library libcudnn.so locally
+I tensorflow/stream_executor/dso_loader.cc:128<span class="o">]</span> successfully opened CUDA library libcufft.so locally
+I tensorflow/stream_executor/dso_loader.cc:128<span class="o">]</span> successfully opened CUDA library libcuda.so.1 locally
+I tensorflow/stream_executor/dso_loader.cc:128<span class="o">]</span> successfully opened CUDA library libcurand.so locally
+</pre></div>
+
+
+<p>Did you see &#8220;Using TensorFlow backend.&#8221;? That was Keras right there. Well&nbsp;done!</p>
+<p>Let&#8217;s do a quick&nbsp;test:</p>
+<p>First get out of your environement, update some packages and enable your environment&nbsp;again:</p>
+<div class="highlight"><pre><span></span><span class="nb">source</span> deactivate
+conda update conda
+conda update anaconda
+conda install nomkl numpy scipy scikit-learn numexpr
+conda update mkl
+<span class="nb">source</span> activate deep-learning
+</pre></div>
+
+
+<p>Now, let&#8217;s get that script running, you&#8217;ll like this, I&nbsp;promise.</p>
+<div class="highlight"><pre><span></span><span class="c1"># get into /tmp to garbage our work afterwards</span>
+<span class="nb">cd</span> /tmp
+mkdir results
+<span class="c1"># download the style transfer script</span>
+wget https://raw.githubusercontent.com/fchollet/keras/master/examples/neural_style_transfer.py
+<span class="c1"># you need these packages to run this particular sample</span>
+</pre></div>
+
+
+<p>Now, download a couple of images that you like on the same folder. Call it <code>myimage.jpg</code> for example. I added this&nbsp;one:</p>
+<p><img src="/images/gallery/style-transfer/myimage.jpg" width="600px"></p>
+<p>Also, download a couple of the <a href="http://www.madisonartshop.com/20-most-famous-paintings-of-all-time.html">most famous paintings of all time</a>.
+Call it <code>mystyle.jpg</code> (or whatever you want, really). I actually got a pic of a painting my wife authored. Bonus point, you know&#8230;&nbsp;;)</p>
+<p><img src="/images/gallery/style-transfer/mystyle.jpg" width="600px"></p>
+<p>Now, the magic&nbsp;command:</p>
+<div class="highlight"><pre><span></span>python neural_style_transfer.py myimage.jpg mystyle.jpg results/myresult
+ls -l results/
+</pre></div>
+
+
+<p>There you should see all the intermediate images that resulted from it. 100th image looks
+ok, though I would probably leave it for a little longer to get a better&nbsp;result.</p>
+<p><img src="/images/gallery/style-transfer/myresult_at_iteration_99.png" width="600px"></p>
+<p>You can also create a&nbsp;gif:</p>
+<div class="highlight"><pre><span></span>convert -delay <span class="m">10</span> -loop <span class="m">0</span> <span class="sb">`</span>ls -v *.png<span class="sb">`</span> animated.gif
+</pre></div>
+
+
+<p><img src="/images/gallery/style-transfer/animated.gif" width="600px"></p>
+<p>For a point of comparison, you can see here the result <a href="http://www.deepart.io/">Deepart.io</a>&nbsp;return:</p>
+<p><img src="/images/gallery/style-transfer/deepart-io.jpg" width="600px"></p>
+<p>I like theirs better, but ours is not that bad!! You just have to play with the settings for a little&nbsp;longer.</p>
+<p>Here is a sample of how the same picture looks with another&nbsp;style:</p>
+<p><img src="/images/gallery/style-transfer/second-style.jpg" width="600px"></p>
+<p>Not bad, right? You can see the chunks of the oil painting transferred into this photo. This is pretty&nbsp;amazing.</p>
+<p>Alright,&nbsp;enjoy!</p>
+  </div>
+  <div class="article_meta">
+    <p>Posted on: Sat 17 December 2016</p>
+    <p>Category: <a href="./category/deep-learning.html">deep-learning</a>
+    </p>
+  </div>
+  <div id="article_comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_identifier = "getting-started-with-nvidia-gpu-anaconda-tensorflow-and-keras-on-arch-linux.html";
+      (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://mimoralea.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+  </div>
+
+</article>
+
+
+      </div>
+
+      <div id="ending_message">
+      <p>By Miguel Morales.</p>
+      </div>
+    </main>
+  </body>
+</html>
