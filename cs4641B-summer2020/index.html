@@ -1,0 +1,459 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <!-- NAME: VERY PLAIN TEXT -->
+        <meta name="viewport" content="width=device-width">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Xin Chen Machine Learning</title>
+        <!-- <style>img {max-width: 100%; height: auto;}</style> -->
+		<style> table.example-table, .example-table td { border: 1px solid green; border-collapse: collapse; } </style>
+
+</head>
+    <body>
+        <p mc:edit="header">CS 4641 B: Machine Learning (Summer 2020)</p>
+
+<h3 id="course-overview">Course Overview</h3>	
+	<ul>
+	<li><strong>Instructor</strong>: Xin Chen (xchen384@gatech.edu)</li>
+	<li><strong>Lecture time</strong>: Monday and Wednesday (3:30 pm-5:40 pm)</li>
+	<li><strong>Location</strong>: entirely online due to COVID-19 pandemic</li>
+	<li><strong>Online lecture link:</strong>: https://bluejeans.com/687936658</li>
+	<li><strong>Piazza</strong>: <a href="https://piazza.com/class/ka03twme81f5cl" target="_blank">https://piazza.com/class/ka03twme81f5cl</a></li>
+	<li><strong>TA</strong> : Wendi Ren (wren44@gatech.edu) and Hua Jiang (huajiang@gatech.edu) </li>
+	</ul>
+
+	<p>This course mainly introduces fundamental techniques in machine learning that widely used in data analysis. 
+	Our emphasis is on two parts: the underlying math as algorithms and their applications. </p>
+
+	<ul>
+		<li>Basic math for data science and machine learning</li>
+		<li>Supervised learning</li>
+		<li>Unsupervised learning</li>
+		<li>Reinforcement learning</li>
+			<!--
+			<li>
+				<p><strong>Supervised learning for predictive data analysis</strong></p>
+				<ul>
+					<li>Tree-based models</li>
+					<li>Linear classification and regression</li>
+					<li>Neural networks</li>
+				</ul>
+			</li>
+			-->
+	</ul>
+
+<p>Prerequisite for this course include: 
+1) basic knowledge of probability, statistics, and linear algebra; 2) Basic programming experiences in python
+</p>
+
+<h3 id="questions">Office hour:</h3>
+	<p>Piazza will be the main place for any discussions or questions. Students are encouraged to discuss anything on this course, such as unclear parts on the lectures, assignments or corrections on the content. Note that one part of the grading attendance is based on the discussions in piazza.
+	If there is something you do not want to talk in public, Piazza supports private message.  </p>
+	<ul>
+	<li>Instructor: Mon 5:30 pm - 6:30 pm at https://bluejeans.com/687936658</li>
+	<li>Wendi: Tue 1:00 pm - 2:00 pm at https://bluejeans.com/7788939771</li>
+	<li>Huang Jiang: Wed 12:00pm - 1:00pm at https://gatech.bluejeans.com/6887816810 </li>
+	</ul>
+	
+<h3 id="schedule">Schedule (Coming soon)</h3>
+
+<table class="example-table">
+<thead>
+<tr>
+<th>Date</th>
+<th>Topic</th>
+<th>Assignment</th>
+<th>Due</th>
+<th>Readings</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>May 11, 2020</td>
+<td>
+<a href="course/1-introduction.pdf" target="_blank">Course Overview</a>;</br>
+<a href="https://bluejeans.com/s/WuN9z/" target="_blank">Class Video Lecture</a>;
+<a href="course/1-introduction-note.pdf" target="_blank">Class Notes</a>;</br>
+</td>
+<td></td>
+<td></td>
+<td>
+<a href="https://policylibrary.gatech.edu/student-affairs/academic-honor-code" target="_blank">GT Honor Code</a>
+</td>
+</tr>
+
+<tr>
+<td>May 13</td>
+<td>
+<a href="course/2-1.pdf" target="_blank">Linear Algebra</a>;</br>
+<a href="https://bluejeans.com/s/2PIbD/" target="_blank">Class Video Lecture</a>;
+<a href="course/2-1-note.pdf" target="_blank">Class Notes</a>;</br>
+<a href="course/2-2.pdf" target="_blank">Probability</a>;</br>
+<a href="https://bluejeans.com/s/vs@qz/" target="_blank">Class Video Lecture</a>;
+<a href="course/2-2-note.pdf" target="_blank">Class Notes</a>;</br>
+</td>
+<td></td>
+<td></td>
+<td>
+<a href="http://cs229.stanford.edu/section/cs229-linalg.pdf" target="_blank">Linear Algebra Review by Zico Kolter</a>;</br>
+<a href="http://web.mit.edu/course/other/be.400/OldFiles/www/SVD/Singular_Value_Decomposition.htm" target="_blank">SVD tutorial</a> ;</br>
+<a href="http://www.cs.cmu.edu/~./awm/tutorials/prob.html" target="_blank">Probability Theory Review by Andrew Moore</a>
+</td>
+</tr>
+
+<tr>
+<td>May 18</td>
+<td>
+Information theory
+<a href="course/3-infoTheory.pdf" target="_blank">Information theory</a>;</br>
+<a href="https://bluejeans.com/s/yOHI5" target="_blank">Class Video Lecture</a>;
+<a href="course/3-note5-18.pdf" target="_blank">Class Notes</a>;</br>
+</td>
+<td></td>
+<td></td>
+<td>
+<a href="http://www.infogineering.net/data-information-knowledge.htm" target="_blank">The Differences Between Data, Information and Knowledge</a>;</br>
+<a href="https://sci.physics.research.narkive.com/nNn8MAxf/entropy-vs-variance" target="_blank">Entropy vs. Variance</a>
+</td>
+</tr>
+
+<tr>
+<td>May 20</td>
+<td>
+<a href="course/4-linear-regression.pdf" target="_blank">Linear regression</a>;</br>
+<a href="https://bluejeans.com/s/3FucF/" target="_blank">Class Video Lecture</a>;</br>
+<a href="course/4-note5-20.pdf" target="_blank">Class Notes</a>;</br>
+</td>
+<td>Homework 1;</br> Attendance sheet</td>
+<td>June 3;May 22</td>
+<td>
+<a href="resources/regression-cmu.pdf" target="_blank">Simple linear regression in Matrix format</a>
+</td>
+</tr>
+
+<tr>
+<td>May 25</td>
+<td>
+No class (Memorial day)
+</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>May 27</td>
+<td>
+<a href="course/5-regulization.pdf" target="_blank">Regulization</a>;</br>
+<a href="https://bluejeans.com/s/46iP2/" target="_blank">Class Video Lecture</a>;</br>
+<a href="course/5-note-wed.pdf" target="_blank">Class Notes</a>;</br>
+</td>
+<td></td>
+<td></td>
+<td>
+<a href="https://towardsdatascience.com/regularization-in-machine-learning-76441ddcf99a" target="_blank">Regularization integration</a>;</br>
+<a href="https://en.wikipedia.org/wiki/Regularization_(mathematics)" target="_blank">Regularization math</a>
+</td>
+</tr>
+
+<tr>
+<td>Jun 1</td>
+<td>
+<a href="course/6-logistic-regression.pdf" target="_blank">Logistic regression</a>;</br>
+<a href="https://bluejeans.com/s/8AG9C/" target="_blank">Class Video Lecture</a>;</br>
+<a href="course/6-note6-1.pdf" target="_blank">Class Notes</a>;</br>
+</td>
+<td></td>
+<td></td>
+<td>
+<a href="https://medium.com/greyatom/logistic-regression-89e496433063" target="_blank">Logistic regression vs Linear regression</a>
+</td>
+</tr>
+
+<tr>
+<td>Jun 3</td>
+<td>
+<a href="course/project.pdf" target="_blank">Project requirement</a>;</br>
+<a href="https://bluejeans.com/s/mpiuF/" target="_blank">Class Video Lecture</a>;</br>
+</td>
+<td>Homework 2; </br> Project proposal</td>
+<td>Jun 17th; Jun 14th</td>
+<td></td>
+</tr>
+
+<tr>
+<td>Jun 8</td>
+<td>
+<a href="course/7-decision-tree.pdf" target="_blank">Decision Tree</a>;</br>
+<a href="https://bluejeans.com/s/OrN9c/" target="_blank">Class Video Lecture</a>;</br>
+<a href="course/7-note6-7.pdf" target="_blank">Class Notes</a>;</br>
+</td>
+<td></td>
+<td></td>
+<td>
+<a href="https://medium.com/greyatom/decision-trees-a-simple-way-to-visualize-a-decision-dc506a403aeb" target="_blank">Intro to Decision Tree</a>
+</td>
+</tr>
+
+<tr>
+<td>Jun 10</td>
+<td>
+<a href="course/8-cluster.pdf" target="_blank">K-means clustering</a>;</br>
+<a href="https://bluejeans.com/s/pGi9h/" target="_blank">Class Video Lecture</a>;</br>
+<a href="course/8-note610.pdf" target="_blank">Class Notes</a>;</br>
+</td>
+<td></td>
+<td></td>
+<td>
+<a href="https://towardsdatascience.com/on-the-curse-of-dimensionality-b91a3a51268" target="_blank">Curse of dimensionality</a>;</br>
+<a href="https://towardsdatascience.com/k-means-clustering-algorithm-applications-evaluation-methods-and-drawbacks-aa03e644b48a" target="_blank">Kmeans application and analysis</a>
+</td>
+</tr>
+
+<tr>
+<td>Jun 15</td>
+<td>
+<a href="course/10-hierarchical-cluster.pdf" target="_blank">Hierarchical clustering</a>;</br>
+<a href="course/10-density-cluster.pdf" target="_blank">Density clustering</a>;</br>
+<a href="course/HW2-officehour.pdf" target="_blank">HW2-officehour</a>;</br>
+<a href="https://bluejeans.com/s/7G9Nj" target="_blank">Class Video Lecture</a>;</br>
+<a href="course/10-note-615.pdf" target="_blank">Class Notes</a>;</br>
+</td>
+<td></td>
+<td></td>
+<td>
+<a href="https://towardsdatascience.com/understanding-the-concept-of-hierarchical-clustering-technique-c6e8243758ec" target="_blank">Concept of hierarchical clustering</a>;</br>
+<a href="https://blog.dominodatalab.com/topology-and-density-based-clustering/" target="_blank">Density based clustering</a>
+</td>
+</tr>
+
+<tr>
+<td>Jun 17</td>
+<td>
+<a href="course/11-GMM.pdf" target="_blank">Gaussian Mixture Model</a>;</br>
+<a href="https://bluejeans.com/s/rWlOn/" target="_blank">Class Video Lecture</a>;</br>
+<a href="course/11-note-618.pdf" target="_blank">Class Notes</a>;</br>
+</td>
+<td>Homework 3</td>
+<td>July 1st</td>
+<td>
+<a href="https://scikit-learn.org/stable/modules/mixture.html" target="_blank">Tools and examples of GMM</a>;</br>
+<a href="http://statweb.stanford.edu/~tibs/stat315a/LECTURES/em.pdf" target="_blank">GMM and EM algorithm</a>
+
+</td>
+</tr>
+
+<tr>
+<td>Jun 22</td>
+<td>
+<a href="course/12-dimension-reduction.pdf" target="_blank">Principle Component Analysis</a>;</br>
+<a href="https://bluejeans.com/s/pyV0s/" target="_blank">Class Video Lecture</a>;</br>
+<a href="course/12-note-622.pdf" target="_blank">Class Notes</a>;</br>
+</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>Jun 24</td>
+<td>
+<a href="course/13-svm.pdf" target="_blank">SVM</a>;</br>
+</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>Jun 29</td>
+<td>
+SVM and Kernalized SVM
+</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>July 1</td>
+<td>
+Reinforcement learning
+</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>July 6</td>
+<td>
+Gradient decent and neural network
+</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>July 8</td>
+<td>
+Deep learning, DRL
+</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>July 13</td>
+<td>
+Deep reinforcement learning and Neural network
+</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>July 20</td>
+<td>
+Presentation of projects
+</td>
+<td>
+Presentation,
+Project report
+</td>
+<td>
+July 20th,
+July 29th
+</td>
+<td></td>
+</tr>
+
+</tbody>
+</table>
+
+<h3 id="grading">Grading</h3>
+<ul>
+	<li><p><strong>Assignments (50%)</strong></p>
+	<ul>
+		<li>There will be 4-5 assignments. Each one is designed to test your understanding of the taught algorithms in our lectures.</li>
+		<li>Each assignment includes two parts: programming and written analysis, except for the first one (a pure math assignment). 
+		You are required to submit both the code and the report. 
+		The assignments will be submitted through GT canvas. Any other submissions like email will not be considered..</li>
+		<li> Although student is allowed to discuss the assignment, each student should submit their solution independently.</li>
+		<li> All assignments follow the “no-late” policy. Assignments received after the due time will receive <strong>zero credit</strong>.</li>
+		<li> All students are expected to follow the <a href="http://policylibrary.gatech.edu/student-affairs/academic-honor-code" target="_blank">Georgia Tech Academic Honor Code</a>.</li>
+	</ul>
+	</li>
+	
+	<li><p><strong>Project (40%)</strong></p>
+	<p> Team link is <a href="https://gtvault-my.sharepoint.com/:x:/g/personal/hjiang74_gatech_edu/EbbYoWhbCMpEkRN8zr9tEzYB27vpPIBZnQQ-bh0H4urYZg" target="_blank">shared excel file.
+	Please fill in your project info in the table as needed.</a> </p>
+	
+	<p> Each project should have a team of 4-5 students. 
+		Note that the standard will not be lowered if your team has less than 4. 
+		Please contact the instructor if your team has less than 4 members. 
+		You are encouraged to form a team on your own, otherwise I will assign you a team randomly. 
+		In the following three sections, team member need to clearly claim your contribution. 
+		If your name is not on the report or the slides, you will receive <strong>zero credit</strong> for the corresponding part.
+	</p>
+		<ul>
+		<li>A project proposal (10%).</li>
+		<li>Presentation (10%). Each team needs to grade other teams.</li>
+		<li> Project report (20%).</li>
+		</ul>
+	</li>
+	<p>We will have a lecture specifically on the content of the project and the requirement.</p>
+	
+	<p>Several <strong>ML tools</strong> might be useful: Tensorflow, PyTorch, Scikit learn, Keras, Google cloud ML. A link on recommending ML tools is 
+	<a href="https://www.softwaretestinghelp.com/machine-learning-tools/" target="_blank">Popular ML tools. </a> </p>
+	
+	<li><p><strong>Class participation (10%)</strong></p>
+	<p> This has two parts (5%+5%). 
+	One part is that I will publish an attendance sheet on piazza and you need to sign there. 
+	The other part is based on how active you are on piazza as an encouragement of asking and answering questions.
+	</p>
+	</li>
+</ul>
+
+<h3 id="grading">Project resources and dataset, thanks to Mahdi and Polo</h3>
+<ul>				<h4> Covid-19 pandemic </h4>
+					<li><a href="https://data.humdata.org/dataset/novel-coronavirus-2019-ncov-cases">Covid-19 cases data from Johns Hopkins University Center (JHU CCSE)</a></li>
+					<li><a href="https://www.kaggle.com/sudalairajkumar/covid19-in-usa">Covid-19 in US from Kaggle</a></li>
+					<li><a href="https://dataverse.harvard.edu/dataverse/2019ncov">Resources for Covid-19 world-wide from Havard dataverse</a></li>
+					<li><a href="https://cloud.google.com/blog/products/data-analytics/free-public-datasets-for-covid19">Covid-19 public dataset from Google cloud</a></li>
+					
+					<h4> Tech comp </h4>
+                    <li><a href="https://toolbox.google.com/datasetsearch">Google Dataset Search</a></li>
+                    <li><a href="http://www.google.com/publicdata/directory">Google public datasets</a>. Thanks Revant!</li>
+                    <li><a href="https://developers.google.com/apis-explorer/#p/">Numerous APIs from Google</a> (e.g., Maps, Freebase, YouTube, etc.)</li>
+					<li><a href="https://www.kaggle.com/datasets">Kaggle public datasets</a></li>
+					<li><a href="http://webscope.sandbox.yahoo.com/">Yahoo WebScope</a></li>
+					<li><a href="https://movement.uber.com/cities">Uber data</a>: Anonymized data from over 2 billion trips</li>
+					<li><a href="http://www.yelp.com/developers/documentation">Yelp</a></li>
+					<li><a href="https://www.microsoft.com/en-us/research/project/microsoft-academic-graph/">Microsoft Academic Graph</a></li>
+                    <li><a href="http://www.zillow.com/howto/api/APIOverview.htm">Zillow</a>: real estate listing site</li>
+					<li><a href="http://www.quandl.com/">Quandl - a dataset search engine for time-series data</a></li>
+					<li><a href="http://aws.amazon.com/datasets/">Amazon AWS Public Data Sets</a> (Thanks Jonathan!)</li>
+                    <li><a href="http://research.microsoft.com/en-us/projects/data-science-initiative/default.aspx">Data Science Initiative - Microsoft Research</a> has various datasets and access to tools that can aid in data science research</li>
+					
+					<h4> Entertainment </h4>
+					<li>Movies data: <a href="http://stackoverflow.com/questions/1966503/does-imdb-provide-an-api">IMDB</a></li>
+					<li><a href="http://the.echonest.com/press-release/the-echo-nest-and-columbia-university-announce-million-song-dataset/">Million song dataset by Echo Nest</a>.<br>
+                        It contains not only the basic information of songs (artist, genre, year, length etc), but also some musical features(like tempo, pitch, key, brightness).<br>
+                        Thanks Minwei!
+                    </li>
+					<li><a href="http://www.soccerbase.com/">Dataset about soccer games, players, clubs</a>. <br>
+                        No API, but easy to scrape.<br>
+                        For a soccer player: transfer history, performance, nationality, birth date, etc.<br>
+                        For a soccer club: performance, squad, etc.<br>
+                        Thanks Ding!
+                    </li>
+					<li><a href="http://www.retrosheet.org/">Retrosheet: MLB statistics (Game/Play logs)</a></li>
+					<li><a href="http://www.pewsocialtrends.org/category/datasets/">Social trends</a> (Thanks Jonathan!)</li>
+					
+					
+					<h4> Academic </h4>
+					<li><a href="http://www.sigkdd.org/kddcup/index.php">KDD Cup</a>: annual competition in data mining, like Kaggle</li>
+					<li>Numerous graph datasets (large and small): <a href="https://snap.stanford.edu/data/index.html">SNAP</a>, <a href="http://konect.uni-koblenz.de/networks/">Konect</a></li>
+                    <li><a href="http://archive.ics.uci.edu/ml/datasets.html">UCI also has a collection of links to various datasets</a> sorted for various tasks (Classification, Regression, etc)<br>Thanks Vinodh!</li>
+					<li>Academic domain: <a href="http://datamarket.azure.com/dataset/mrc/microsoftacademic">Microsoft Academic Search</a>, <a href="http://www.informatik.uni-trier.de/~%20ley/db/about/simpleparser/index.html">DBLP</a></li>
+                    <li><a href="http://sci2s.ugr.es/keel/category.php?cat=clas&order=clas#sub2">Classification datasets</a> <br>Thanks Amish!</li>
+					<li><a href="http://academictorrents.com/">Academic torrents (terabytes)</a> (Thanks Vaibhav!)</li>
+					<li><a href="https://engineering.case.edu/eciv/geodatabase/">Civil Engineering Dataset</a> (Thanks Dr. Frost)</li>
+					
+					
+					<h4> The summarized </h4>
+                    <li><a href="https://github.com/awesomedata/awesome-public-datasets">Awesome Public Datasets</a>. Thanks Marcel Gwerder!</li>
+					<li><a href="https://gist.github.com/entaroadun/1653794">List of lists of datasets for recommendations</a>.<br>Thanks Jon!</li>
+                    <li><a href="https://www.quora.com/Where-can-I-find-large-datasets-open-to-the-public">Large datasets publicly available</a>. Thanks Gopi!</li>
+					<li><a href="http://www.datasciencecentral.com/profiles/blogs/the-free-big-data-sources-everyone-should-know">The Free 'Big Data' Sources Everyone Should Know</a></li>
+                    
+					
+					<h4> The specialized </h4>
+					<li><a href="http://gtjourney.gatech.edu/gt-devhub/apis">Georgia Tech's campus data (has APIs)</a>: bus info, directory, building, T-square, room reservation, building facilities usage (e.g., electricity, lights, A/C, etc.), Oscar/course info/registration, etc.</li>
+					<li><a href="http://chriswhong.com/open-data/foil_nyc_taxi/">NYC Taxi data</a> for 2013 (suggested by Chris Wong).
+                        2013 Trip Data (11.0GB). 2013 Fare Data (7.7GB).
+                        <a href="http://nyctaxi.herokuapp.com/">Visualization for a days trip</a>. Thanks Jitesh.</li>
+                    <li><a href="http://www.data.gov">Data.gov</a>: U.S. Government's open data</li>
+                    <li><a href="https://nces.ed.gov/ipeds/Home/UseTheData">IPEDS data</a>: Postsecondary education data from National Centre for Education Statistics</li>
+                    <li><a href="https://www.bls.gov/data/">Bureau of Labor Statistics data</a></li>
+					<li><a href="http://maps.ngdc.noaa.gov/viewers/geophysics/">Various geophysical datasets</a> for the oceans (magnetism, gravity, seismology, etc).<br>Thanks Ryan!</li>
+
+                    
+</ul>
+		<!-- content 
+        <div mc:edit="footer">
+        <br><br>*|IFNOT:ARCHIVE_PAGE|* *|LIST:DESCRIPTION|* *|END:IF|*<br><br>
+        <a href="*|UNSUB|*">unsubscribe</a> | 
+        <a href="*|UPDATE_PROFILE|*">edit preferences</a><br>
+        <br>
+        *|IF:REWARDS|* *|HTML:REWARDS|* *|END:IF|*
+        </div>
+		-->
+    </body>
+</html>
