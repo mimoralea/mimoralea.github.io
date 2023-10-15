@@ -9,7 +9,7 @@ h1, h2, h3, h4, h5, h6, button, .button, a {
     font-family: 'Quattrocento', serif;
 }
 
-a {font-size: 200px}
+a{font-size: 200px}
 
 .full-width {
     width: 100%;
@@ -24,4 +24,11 @@ a {font-size: 200px}
 
 .logo-emp {
     color: #444444;
+}
+
+img{
+  width:80px;
+  height:80px;
+  border-radius: 50%;
+  object-fit: cover;
 }
