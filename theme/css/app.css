@@ -32,3 +32,8 @@ img{
   border-radius: 50%;
   object-fit: cover;
 }
+
+pre {
+  text-align: left;
+  white-space: pre-line;
+}
