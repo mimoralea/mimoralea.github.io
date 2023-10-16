@@ -33,10 +33,7 @@ img{
   object-fit: cover;
 }
 
-pre {
+pre, code {
   text-align: left;
-}
-
-code {
   white-space:pre-line;
 }
