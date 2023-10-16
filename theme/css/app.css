@@ -36,3 +36,7 @@ img{
 pre {
   text-align: left;
 }
+
+pre, code{
+    white-space:normal;
+}
